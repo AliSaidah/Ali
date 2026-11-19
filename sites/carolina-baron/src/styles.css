@@ -437,6 +437,22 @@ em { font-style: italic; }
 }
 @media (max-width: 960px) { .float-wa { display: inline-flex; } }
 
+/* Selo de prévia de proposta */
+.preview-badge {
+  position: fixed; z-index: 46; left: calc(16px + env(safe-area-inset-left, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 10px; max-width: calc(100vw - 32px);
+  min-height: 44px; padding: 6px 6px 6px 16px; border-radius: 999px;
+  background: rgba(13, 11, 10, 0.82); border: 1px solid var(--hair); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: var(--smoke);
+}
+.preview-badge:not(:has(a)) { padding-right: 16px; }
+.preview-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--champagne); box-shadow: 0 0 0 4px rgba(226, 201, 160, 0.18); flex: none; }
+.preview-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.preview-badge a { flex: none; display: inline-flex; align-items: center; min-height: 32px; padding: 0 14px; border-radius: 999px; background: var(--ivory); color: var(--noir); font-weight: 700; letter-spacing: 0.06em; }
+@media (max-width: 960px) {
+  .preview-badge { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .grain { animation: none; }

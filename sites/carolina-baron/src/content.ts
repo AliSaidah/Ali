@@ -69,6 +69,14 @@ export const site = {
   ] satisfies Procedure[],
 };
 
+// Modo prévia de proposta: mostra um selo com o contato da agência.
+// Quando o cliente comprar, mude enabled para false e tire a meta "robots" do index.html.
+export const preview = {
+  enabled: true,
+  agency: '', // nome da sua agência (opcional)
+  whatsapp: '', // seu WhatsApp com DDI e DDD, ex.: 5517999999999
+};
+
 export const categories: Category[] = ['Contorno', 'Rejuvenescimento', 'Preenchimentos', 'Cuidado'];
 
 export function wa(text: string) {

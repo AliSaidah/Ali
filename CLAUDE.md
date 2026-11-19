@@ -85,5 +85,19 @@ lateral e com botão flutuante de contato) e mantenha os alvos de toque com 44px
      link com nome, fotos ou contatos de uma pessoa ou empresa real.
   3. A versão real fica em `sites/<cliente>/`. Para rodar localmente:
      `npm install` e depois `npm run dev`, abrindo http://localhost:5173.
+## Fluxo de venda (prévia de proposta)
+
+O usuário vende assim: cria o site, manda o link para o dono do negócio e pergunta se ele quer comprar.
+
+- Todo site novo começa em **modo prévia**:
+  - `preview.enabled = true` em `src/content.ts`, com o nome e o WhatsApp da agência;
+  - meta `robots` `noindex, nofollow` no `index.html`.
+  O selo "Prévia feita para você" traz o botão "Quero este site", que abre o WhatsApp da agência.
+- Gere o build (`npx vite build`), compacte o **conteúdo** de `dist/` num .zip e envie ao usuário.
+  Ele publica pelo Netlify Drop (app.netlify.com/drop), arrastando a pasta, e manda o link ao cliente.
+  Quem publica é o usuário, na conta dele. Claude não publica a versão com dados reais.
+- Quando o cliente comprar: `preview.enabled = false`, remova a meta `robots`, peça as fotos
+  originais e a autorização de uso, e coloque no domínio do cliente.
+
 - Fotos de cliente vão em `public/`. Se vierem de print de tela, recorte bem e avise
   que os originais em alta resolução ficam melhores.

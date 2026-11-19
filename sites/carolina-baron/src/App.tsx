@@ -2,7 +2,21 @@ import { useEffect, useState } from 'react';
 import { startLenis, getLenis, ScrollTrigger } from './lib/motion';
 import { Preloader, Cursor, Nav, Atmosphere } from './components/Chrome';
 import { Hero, Marquee, Manifesto, Method, Procedures, Visit, Cta, Footer } from './components/Sections';
-import { waBooking } from './content';
+import { waBooking, preview, site } from './content';
+
+function PreviewBadge() {
+  if (!preview.enabled) return null;
+  const href = preview.whatsapp
+    ? `https://wa.me/${preview.whatsapp}?text=${encodeURIComponent(`Olá! Vi a prévia do site da ${site.title} ${site.name} e tenho interesse.`)}`
+    : null;
+  return (
+    <div className="preview-badge" role="note">
+      <span className="preview-dot" aria-hidden="true" />
+      <span className="preview-text">Prévia feita para você{preview.agency ? ` · ${preview.agency}` : ''}</span>
+      {href && <a href={href} target="_blank" rel="noopener noreferrer">Quero este site</a>}
+    </div>
+  );
+}
 import { Icon } from './components/ui';
 
 export default function App() {
@@ -54,6 +68,7 @@ export default function App() {
           <Footer />
         </>
       )}
+      <PreviewBadge />
       <a className="float-wa" href={waBooking} target="_blank" rel="noopener noreferrer" aria-label="Agendar pelo WhatsApp">
         <Icon.WhatsApp /> <span>Agendar</span>
       </a>
