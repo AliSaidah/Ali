@@ -16,8 +16,9 @@ export const site = {
   role: 'Estética Avançada & Harmonização Facial',
   tagline: 'Harmonização com elegância, sem excessos.',
   motto: 'O maior investimento é aquele que você faz em você.',
+  // Texto tirado das legendas do Instagram da Dra. Carolina.
   manifesto:
-    'Harmonização com elegância, sem excessos. Cada rosto tem uma história, uma estrutura e uma expressão próprias. O meu trabalho é estudar tudo isso e realçar o que já é seu, com resultados naturais que você sente antes de qualquer pessoa perceber.',
+    'Estética é técnica, precisão e respeito à individualidade. Meu trabalho é valorizar o que já existe de bonito em cada paciente, com planejamento, conhecimento e naturalidade. Não é sobre mudar rostos. É sobre conduzir o seu olhar com mais gentileza, consciência e verdade.',
 
   whatsapp: '5517991410721',
   phoneDisplay: '(17) 99141-0721',
@@ -35,7 +36,8 @@ export const site = {
   },
 
   // Coloque a foto em /public (ex.: /carolina.jpg) e informe o caminho aqui.
-  portrait: null as string | null,
+  portrait: '/carolina-retrato.jpg' as string | null,
+  ctaPhoto: '/carolina-vermelho.jpg' as string | null,
 
   method: [
     { title: 'Análise facial', text: 'Estudo das proporções, da estrutura óssea, da pele e da sua expressão em movimento. Tudo começa ouvindo o que incomoda você.' },

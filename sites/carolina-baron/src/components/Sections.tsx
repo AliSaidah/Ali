@@ -327,13 +327,24 @@ export function Cta() {
     gsap.from(split.chars, { yPercent: 120, duration: 1.2, ease: EASE, stagger: 0.018, scrollTrigger: { trigger: '.cta-title', start: 'top 80%' } });
     gsap.from('.cta-orb', { scale: 0.4, autoAlpha: 0, rotate: -90, duration: 1.6, ease: EASE, scrollTrigger: { trigger: '.cta-title', start: 'top 70%' } });
     gsap.to('.cta-ring', { rotate: 360, duration: 18, ease: 'none', repeat: -1 });
+    if (ref.current!.querySelector('.cta-photo')) {
+      gsap.fromTo('.cta-photo-frame', { clipPath: 'inset(0% 0% 100% 0% round 999px 999px 24px 24px)' }, {
+        clipPath: 'inset(0% 0% 0% 0% round 999px 999px 24px 24px)', duration: 1.8, ease: 'expo.inOut',
+        scrollTrigger: { trigger: '.cta-photo', start: 'top 80%' },
+      });
+      gsap.fromTo('.cta-photo img', { yPercent: -10, scale: 1.18 }, {
+        yPercent: 8, scale: 1.04, ease: 'none',
+        scrollTrigger: { trigger: '.cta-photo', start: 'top bottom', end: 'bottom top', scrub: true },
+      });
+    }
     return () => split.revert();
   }, { scope: ref });
 
   return (
     <section ref={ref} className="cta" id="agendar">
       <SilkCanvas className="cta-silk" intensity={0.85} />
-      <div className="container cta-inner">
+      <div className={`container cta-inner ${site.ctaPhoto ? 'has-photo' : ''}`}>
+        <div className="cta-main">
         <p className="eyebrow"><span className="eyebrow-line" />Agendamentos</p>
         <h2 className="cta-title">Agende a sua <em>avaliação</em></h2>
         <div className="cta-row">
@@ -348,6 +359,14 @@ export function Cta() {
           </MagneticLink>
           <p className="cta-phone"><span className="label">WhatsApp</span>{site.phoneDisplay}</p>
         </div>
+        </div>
+        {site.ctaPhoto && (
+          <figure className="cta-photo">
+            <div className="cta-photo-frame">
+              <img src={site.ctaPhoto} alt={`${site.title} ${site.name}`} loading="lazy" />
+            </div>
+          </figure>
+        )}
       </div>
     </section>
   );
