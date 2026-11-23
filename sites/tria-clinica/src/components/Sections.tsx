@@ -38,7 +38,7 @@ export function Hero({ ready }: { ready: boolean }) {
       <div className="container hero-grid">
         <ul className="hero-meta caps">
           <li><span className="idx">01</span>{site.kind}</li>
-          <li>Beleza + saúde mental</li>
+          <li>{site.motto}</li>
           <li>{site.city} — {site.state}</li>
           <li><span className="dot" /> Agendamentos abertos</li>
         </ul>
@@ -48,7 +48,7 @@ export function Hero({ ready }: { ready: boolean }) {
         <div className="hero-photo-wrap">
           <span className="hero-ring" aria-hidden="true" />
           <figure className="hero-photo">
-            <img src={site.photo} alt="Recepção da Clínica Tria com balcão de mármore, madeira clara e lustre dourado" />
+            <img src={site.photo} alt="Recepção da Clínica Tria com o logo na parede, lustre de globos e balcão de mármore" />
           </figure>
         </div>
         <div className="hero-actions">
@@ -234,42 +234,43 @@ export function Services() {
   );
 }
 
-/* ---------- O espaço: a foto nasce de um círculo e toma a tela ---------- */
+/* ---------- O espaço: galeria em que cada foto nasce de um círculo ---------- */
 export function Space() {
   const ref = useRef<HTMLElement>(null);
 
   useGSAP(() => {
     if (reducedMotion) return;
-    // Toca sozinha quando o quadro entra na tela (sem travar a rolagem).
-    const tl = gsap.timeline({ scrollTrigger: { trigger: '.space-pin', start: 'top 72%', toggleActions: 'play none none none' } });
-    tl.fromTo('.space-media', { clipPath: 'circle(14% at 50% 50%)' }, { clipPath: 'circle(75% at 50% 50%)', duration: 1.4, ease: 'power3.inOut' })
-      .fromTo('.space-media img', { scale: 1.3 }, { scale: 1, duration: 1.6, ease: 'power3.out' }, 0)
-      .fromTo('.space-shade', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, 0.8)
-      .fromTo('.space-overlay > *', { autoAlpha: 0, filter: 'blur(12px)', y: 20 }, { autoAlpha: 1, filter: 'blur(0px)', y: 0, stagger: 0.12, duration: 0.8, ease: 'power2.out' }, 1.0);
-    gsap.from('.space-info > *', { autoAlpha: 0, y: 30, duration: 1, ease: 'power3.out', stagger: 0.1, scrollTrigger: { trigger: '.space-info', start: 'top 85%' } });
+    focusIn(SplitText.create('.space-title', { type: 'words,chars' }).chars, { scrollTrigger: { trigger: '.space-title', start: 'top 85%' } });
+    // Toca sozinha quando a galeria entra na tela (sem travar a rolagem).
+    const tl = gsap.timeline({ scrollTrigger: { trigger: '.space-gallery', start: 'top 75%', toggleActions: 'play none none none' } });
+    tl.fromTo('.sg', { clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(75% at 50% 50%)', duration: 1.3, ease: 'power3.inOut', stagger: 0.18 })
+      .fromTo('.sg img', { scale: 1.3 }, { scale: 1, duration: 1.6, ease: 'power3.out', stagger: 0.18 }, 0);
+    gsap.utils.toArray<HTMLElement>('.sg').forEach((el, i) => {
+      gsap.fromTo(el, { y: 30 + i * 20 }, { y: -30 - i * 20, ease: 'none', scrollTrigger: { trigger: '.space-gallery', start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+    gsap.from('.space-side > *', { autoAlpha: 0, y: 30, duration: 1, ease: 'power3.out', stagger: 0.1, scrollTrigger: { trigger: '.space-side', start: 'top 85%' } });
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="space" id="espaco">
-      <div className="container space-frame-wrap">
-      <div className="space-pin">
-        <div className="space-media">
-          <img src={site.photo} alt="Recepção da Clínica Tria: balcão de mármore e madeira, lustre dourado e parede em cimento queimado" loading="lazy" />
-          <div className="space-shade" />
-        </div>
-        <div className="space-overlay">
-          <p className="sec-label caps"><span className="idx">06</span>O espaço</p>
+    <section ref={ref} className="space section" id="espaco">
+      <div className="container">
+        <p className="sec-label caps"><span className="idx">06</span>O espaço</p>
+        <div className="space-head">
           <h2 className="space-title">Um espaço pensado para o seu cuidado.</h2>
+          <p className="space-text">{site.space}</p>
         </div>
-      </div>
-      </div>
-      <div className="container space-info">
-        <p className="space-text">{site.space}</p>
+        <div className="space-gallery">
+          {site.gallery.map((g, i) => (
+            <figure className={`sg sg--${i + 1}`} key={g.src}>
+              <img src={g.src} alt={g.alt} loading="lazy" />
+            </figure>
+          ))}
+        </div>
         <div className="space-side">
           <p className="space-soon">{site.visit}</p>
           <dl className="spec caps">
             <div><dt>Cidade</dt><dd>{site.city} — {site.state}</dd></div>
-            <div><dt>Frentes</dt><dd>Beleza + saúde mental</dd></div>
+            <div><dt>Cuidado</dt><dd>{site.motto}</dd></div>
             <div><dt>Atendimento</dt><dd><span className="dot" /> Com agendamento</dd></div>
           </dl>
         </div>

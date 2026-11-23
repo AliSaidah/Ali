@@ -6,6 +6,8 @@ export const site = {
   fullName: 'Clínica Tria',
   kind: 'Clínica Integrada',
   areas: 'Beleza e Saúde Mental',
+  // Inscrição da parede da recepção.
+  motto: 'Mente · Face · Corpo',
   tagline: 'Um novo conceito que integra beleza e mente.',
   city: 'São José do Rio Preto',
   state: 'SP',
@@ -51,7 +53,13 @@ export const site = {
   // CONFIRMAR: WhatsApp da clínica com DDI e DDD (ex.: 5517999999999). Vazio = botões levam ao Direct do Instagram.
   whatsapp: '',
 
-  photo: '/tria-recepcao.jpg',
+  // Fotos do Instagram da clínica (recortadas de print; originais ficam melhores).
+  photo: '/tria-recepcao-logo.jpg',
+  gallery: [
+    { src: '/tria-arvore.jpg', alt: 'Canto de espera com árvore, arandelas redondas e poltrona caramelo' },
+    { src: '/tria-logo-parede.jpg', alt: 'Logo TRIA em dourado na parede, com a inscrição Mente, Face, Corpo, sob lustre de globos' },
+    { src: '/tria-sala.jpg', alt: 'Sala de espera com poltronas caramelo, almofadas e árvore' },
+  ],
 };
 
 // Modo prévia de proposta: mostra um selo com o contato da agência.
