@@ -15,7 +15,7 @@ let lenis: Lenis | null = null;
 
 export function startLenis() {
   if (reducedMotion || lenis) return lenis;
-  lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.95 });
+  lenis = new Lenis({ lerp: 0.12, wheelMultiplier: 1 });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((t) => lenis?.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);

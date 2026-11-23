@@ -8,7 +8,7 @@ import { Logo } from './Logo';
 function focusIn(targets: gsap.TweenTarget, vars: gsap.TweenVars = {}) {
   return gsap.from(targets, {
     autoAlpha: 0, filter: 'blur(14px)', y: 8, duration: 1.1, ease: 'power2.out',
-    stagger: { each: 0.022, from: 'random' }, ...vars,
+    stagger: { each: 0.022, from: 'random' }, clearProps: 'filter,transform,opacity,visibility', ...vars,
   });
 }
 
@@ -23,7 +23,7 @@ export function Hero({ ready }: { ready: boolean }) {
     tl.add(focusIn(split.chars, { duration: 1.3 }), 0.1)
       .from('.hero-ring', { scale: 0.6, autoAlpha: 0, rotate: -40, duration: 1.8, ease: 'expo.out' }, 0.6)
       .from('.hero-meta > *', { autoAlpha: 0, y: 10, duration: 0.8, ease: 'power2.out', stagger: 0.07 }, 0.4)
-      .fromTo('.hero-photo', { clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(50% at 50% 50%)', duration: 1.6, ease: 'expo.inOut' }, 0.3)
+      .fromTo('.hero-photo', { clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(50% at 50% 50%)', duration: 1.6, ease: 'expo.inOut', clearProps: 'clipPath' }, 0.3)
       .from('.hero-actions > *', { autoAlpha: 0, y: 14, duration: 0.9, ease: 'power2.out', stagger: 0.08 }, 1.0);
 
     const st = { trigger: ref.current, start: 'top top', end: 'bottom top', scrub: true };
@@ -72,7 +72,7 @@ export function Concept() {
         scrollTrigger: { trigger: el, start: 'top 80%', end: 'top 45%', scrub: true },
       });
     });
-    gsap.from('.concept-text', { autoAlpha: 0, filter: 'blur(10px)', duration: 1.4, ease: 'power2.out', scrollTrigger: { trigger: '.concept-text', start: 'top 85%' } });
+    gsap.from('.concept-text', { autoAlpha: 0, filter: 'blur(10px)', duration: 1.4, ease: 'power2.out', clearProps: 'filter', scrollTrigger: { trigger: '.concept-text', start: 'top 85%' } });
   }, { scope: ref });
 
   return (
@@ -112,7 +112,7 @@ export function Venn() {
         .to('.vc--a', { [axis]: 0, duration: 0.8, ease: 'power3.inOut' }, 1.0)
         .to('.vc--b', { [axis]: 0, duration: 0.8, ease: 'power3.inOut' }, 1.0)
         .to('.venn-core', { scale: 1, duration: 0.8, ease: 'power3.inOut' }, 1.0)
-        .fromTo('.venn-text', { autoAlpha: 0, filter: 'blur(10px)', y: 20 }, { autoAlpha: 1, filter: 'blur(0px)', y: 0, duration: 0.7, ease: 'power2.out' }, 1.6);
+        .fromTo('.venn-text', { autoAlpha: 0, filter: 'blur(10px)', y: 20 }, { autoAlpha: 1, filter: 'blur(0px)', y: 0, duration: 0.7, ease: 'power2.out', clearProps: 'filter' }, 1.6);
     });
     return () => mm.revert();
   }, { scope: ref });
@@ -151,7 +151,11 @@ export function Pillars() {
       const next = cards[i + 1];
       if (!next) return;
       gsap.to(card, {
-        scale: 0.92, '--dim': 0.18, ease: 'none',
+        scale: 0.92, ease: 'none',
+        scrollTrigger: { trigger: next, start: 'top bottom', end: 'top 20%', scrub: true },
+      });
+      gsap.to(card.querySelector('.card-dim'), {
+        opacity: 0.18, ease: 'none',
         scrollTrigger: { trigger: next, start: 'top bottom', end: 'top 20%', scrub: true },
       });
     });
@@ -168,6 +172,7 @@ export function Pillars() {
         <div className="cards">
           {site.pillars.map((p, i) => (
             <article className={`card card--${tone[i]}`} key={p.title} style={{ '--i': i } as React.CSSProperties}>
+              <span className="card-dim" aria-hidden="true" />
               <div className="card-top caps">
                 <span>{String(i + 1).padStart(2, '0')} / 03</span>
                 <span>{i < 2 ? 'Frente de cuidado' : 'O que nos une'}</span>
@@ -243,7 +248,7 @@ export function Space() {
     focusIn(SplitText.create('.space-title', { type: 'words,chars' }).chars, { scrollTrigger: { trigger: '.space-title', start: 'top 85%' } });
     // Toca sozinha quando a galeria entra na tela (sem travar a rolagem).
     const tl = gsap.timeline({ scrollTrigger: { trigger: '.space-gallery', start: 'top 75%', toggleActions: 'play none none none' } });
-    tl.fromTo('.sg', { clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(75% at 50% 50%)', duration: 1.3, ease: 'power3.inOut', stagger: 0.18 })
+    tl.fromTo('.sg', { clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(75% at 50% 50%)', duration: 1.3, ease: 'power3.inOut', stagger: 0.18, clearProps: 'clipPath' })
       .fromTo('.sg img', { scale: 1.3 }, { scale: 1, duration: 1.6, ease: 'power3.out', stagger: 0.18 }, 0);
     gsap.utils.toArray<HTMLElement>('.sg').forEach((el, i) => {
       gsap.fromTo(el, { y: 30 + i * 20 }, { y: -30 - i * 20, ease: 'none', scrollTrigger: { trigger: '.space-gallery', start: 'top bottom', end: 'bottom top', scrub: true } });

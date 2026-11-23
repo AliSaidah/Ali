@@ -98,6 +98,15 @@ invente novos e evite o que já está no registro acima:
   - listas com card de prévia seguindo o cursor.
 - **Acabamento:** grão sutil e barra de progresso de leitura.
 
+**Desempenho (sem travadinhas na rolagem):**
+- animações de desfoque (`filter: blur`) e de `clip-path` precisam limpar o estilo ao terminar
+  (`clearProps`), senão cada letra ou foto fica com filtro ativo durante a rolagem;
+- nada de `backdrop-filter` em elementos fixos (menu, selos, botões flutuantes);
+- não anime variáveis CSS nem `box-shadow` na rolagem; anime só `transform` e `opacity`;
+- prefira animações que tocam sozinhas ao entrar na tela; seção travada com scrub só quando
+  for leve, e teste no celular;
+- meça os quadros lentos com Playwright (rolagem + `requestAnimationFrame`) antes de entregar.
+
 Sempre respeite `prefers-reduced-motion`, funcione bem no celular (sem rolagem
 lateral e com botão flutuante de contato) e mantenha os alvos de toque com 44px ou mais.
 
