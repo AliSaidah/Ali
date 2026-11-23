@@ -20,38 +20,40 @@ export function Hero({ ready }: { ready: boolean }) {
     if (!ready || reducedMotion) return;
     const split = SplitText.create('.hero-title', { type: 'words,chars' });
     const tl = gsap.timeline();
-    tl.from('.grid-lines span', { scaleY: 0, duration: 1.4, ease: 'expo.inOut', stagger: 0.04 })
-      .add(focusIn(split.chars, { duration: 1.3 }), 0.2)
+    tl.add(focusIn(split.chars, { duration: 1.3 }), 0.1)
+      .from('.hero-ring', { scale: 0.6, autoAlpha: 0, rotate: -40, duration: 1.8, ease: 'expo.out' }, 0.6)
       .from('.hero-meta > *', { autoAlpha: 0, y: 10, duration: 0.8, ease: 'power2.out', stagger: 0.07 }, 0.4)
       .fromTo('.hero-photo', { clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(50% at 50% 50%)', duration: 1.6, ease: 'expo.inOut' }, 0.3)
       .from('.hero-actions > *', { autoAlpha: 0, y: 14, duration: 0.9, ease: 'power2.out', stagger: 0.08 }, 1.0);
 
     const st = { trigger: ref.current, start: 'top top', end: 'bottom top', scrub: true };
     gsap.to('.hero-photo img', { scale: 1.3, ease: 'none', scrollTrigger: st });
-    gsap.to('.hero-photo', { yPercent: -18, ease: 'none', scrollTrigger: st });
+    gsap.to('.hero-photo-wrap', { yPercent: -18, ease: 'none', scrollTrigger: st });
     gsap.to('.hero-title', { yPercent: -10, ease: 'none', scrollTrigger: st });
     return () => split.revert();
   }, { dependencies: [ready], scope: ref });
 
   return (
     <section ref={ref} className="hero" id="inicio">
-      <div className="grid-lines" aria-hidden="true">{Array.from({ length: 12 }, (_, i) => <span key={i} />)}</div>
       <div className="container hero-grid">
-        <ul className="hero-meta mono">
-          <li><span className="mono-idx">01</span>{site.kind}</li>
+        <ul className="hero-meta caps">
+          <li><span className="idx">01</span>{site.kind}</li>
           <li>Beleza + saúde mental</li>
           <li>{site.city} — {site.state}</li>
           <li><span className="dot" /> Em preparação</li>
         </ul>
         <h1 className="hero-title">
-          Um novo conceito que integra <span className="c-clay">beleza</span> e <span className="c-sage">mente.</span>
+          Um novo conceito que integra <span className="c-copper">beleza</span> e <span className="c-taupe">mente.</span>
         </h1>
-        <figure className="hero-photo">
-          <img src={site.photo} alt="Recepção da Clínica Tria com balcão de mármore, madeira clara e lustre dourado" />
-        </figure>
+        <div className="hero-photo-wrap">
+          <span className="hero-ring" aria-hidden="true" />
+          <figure className="hero-photo">
+            <img src={site.photo} alt="Recepção da Clínica Tria com balcão de mármore, madeira clara e lustre dourado" />
+          </figure>
+        </div>
         <div className="hero-actions">
           <a className="btn" href={contact.href} target="_blank" rel="noopener noreferrer">Acompanhe a abertura ↗</a>
-          <a className="link-mono" href="#conceito" onClick={(e) => { e.preventDefault(); scrollToTarget('#conceito'); }}>Conheça o conceito ↓</a>
+          <a className="link-caps" href="#conceito" onClick={(e) => { e.preventDefault(); scrollToTarget('#conceito'); }}>Conheça o conceito ↓</a>
         </div>
       </div>
     </section>
@@ -76,12 +78,12 @@ export function Concept() {
   return (
     <section ref={ref} className="concept section" id="conceito">
       <div className="container concept-grid">
-        <p className="sec-label mono"><span className="mono-idx">02</span>O conceito</p>
+        <p className="sec-label caps"><span className="idx">02</span>O conceito</p>
         <p className="concept-text">
-          A {site.fullName} é sobre compreender o indivíduo <mark className="hl hl--clay">em sua totalidade</mark>, respeitando suas{' '}
-          <mark className="hl hl--sage">particularidades, necessidades e momentos.</mark>
+          A {site.fullName} é sobre compreender o indivíduo <mark className="hl hl--copper">em sua totalidade</mark>, respeitando suas{' '}
+          <mark className="hl hl--taupe">particularidades, necessidades e momentos.</mark>
         </p>
-        <p className="concept-caption mono">“{site.caption}” — {site.instagram.handle}</p>
+        <p className="concept-caption caps">“{site.caption}” — {site.instagram.handle}</p>
       </div>
     </section>
   );
@@ -119,17 +121,17 @@ export function Venn() {
   return (
     <section ref={ref} className="venn" id="integracao">
       <div className="venn-stage container">
-        <p className="sec-label mono"><span className="mono-idx">03</span>Integração</p>
+        <p className="sec-label caps"><span className="idx">03</span>Integração</p>
         <div className="venn-field">
           <div className="vc vc--a">
-            <span className="vc-label"><b>Beleza</b><small className="mono">Aparência</small></span>
+            <span className="vc-label"><b>Beleza</b><small className="caps">Aparência</small></span>
           </div>
           <div className="vc vc--b">
-            <span className="vc-label"><b>Saúde mental</b><small className="mono">Mente</small></span>
+            <span className="vc-label"><b>Saúde mental</b><small className="caps">Mente</small></span>
           </div>
           <div className="venn-core">
-            <Logo solid="#F4F1EC" title="Tria" />
-            <span className="mono">Cuidado integrado</span>
+            <Logo solid="#F6EFE6" title="Tria" />
+            <span className="caps">Cuidado integrado</span>
           </div>
         </div>
         <p className="venn-text">{site.pillars[2].text}</p>
@@ -156,18 +158,18 @@ export function Pillars() {
     });
   }, { scope: ref });
 
-  const tone = ['clay', 'sage', 'ink'];
+  const tone = ['cognac', 'cement', 'espresso'];
   return (
     <section ref={ref} className="pillars section" id="cuidado">
       <div className="container">
         <div className="pillars-head">
-          <p className="sec-label mono"><span className="mono-idx">04</span>Caminhos de cuidado</p>
+          <p className="sec-label caps"><span className="idx">04</span>Caminhos de cuidado</p>
           <h2 className="pillars-title">O indivíduo em sua totalidade.</h2>
         </div>
         <div className="cards">
           {site.pillars.map((p, i) => (
             <article className={`card card--${tone[i]}`} key={p.title} style={{ '--i': i } as React.CSSProperties}>
-              <div className="card-top mono">
+              <div className="card-top caps">
                 <span>{String(i + 1).padStart(2, '0')} / 03</span>
                 <span>{i < 2 ? 'Frente de cuidado' : 'O que nos une'}</span>
               </div>
@@ -209,7 +211,7 @@ export function Space() {
           <div className="space-shade" />
         </div>
         <div className="space-overlay container">
-          <p className="sec-label mono"><span className="mono-idx">05</span>O espaço</p>
+          <p className="sec-label caps"><span className="idx">05</span>O espaço</p>
           <h2 className="space-title">Um novo espaço tomando forma.</h2>
         </div>
       </div>
@@ -217,7 +219,7 @@ export function Space() {
         <p className="space-text">{site.space}</p>
         <div className="space-side">
           <p className="space-soon">{site.soon}</p>
-          <dl className="spec mono">
+          <dl className="spec caps">
             <div><dt>Status</dt><dd><span className="dot" /> Em preparação</dd></div>
             <div><dt>Cidade</dt><dd>{site.city} — {site.state}</dd></div>
             <div><dt>Frentes</dt><dd>Beleza + saúde mental</dd></div>
@@ -241,16 +243,16 @@ export function Contact() {
   return (
     <section ref={ref} className="contact section" id="contato">
       <div className="container">
-        <p className="sec-label mono"><span className="mono-idx">06</span>Em breve</p>
-        <h2 className="contact-title">Uma nova forma de cuidar já começou a tomar forma <span className="c-clay">por aqui.</span></h2>
+        <p className="sec-label caps"><span className="idx">06</span>Em breve</p>
+        <h2 className="contact-title">Uma nova forma de cuidar já começou a tomar forma <span className="c-copper">por aqui.</span></h2>
         <div className="rows">
           <a className="row" href={site.instagram.url} target="_blank" rel="noopener noreferrer">
-            <span className="row-k mono">Instagram</span>
+            <span className="row-k caps">Instagram</span>
             <span className="row-v">{site.instagram.handle}</span>
             <span className="row-go" aria-hidden="true">↗</span>
           </a>
-          <a className="row row--sage" href={contact.href} target="_blank" rel="noopener noreferrer">
-            <span className="row-k mono">{contact.kind === 'whatsapp' ? 'WhatsApp' : 'Mensagem direta'}</span>
+          <a className="row row--taupe" href={contact.href} target="_blank" rel="noopener noreferrer">
+            <span className="row-k caps">{contact.kind === 'whatsapp' ? 'WhatsApp' : 'Mensagem direta'}</span>
             <span className="row-v">Fale com a Tria</span>
             <span className="row-go" aria-hidden="true">↗</span>
           </a>
@@ -264,12 +266,12 @@ export function Contact() {
 export function Footer() {
   return (
     <footer className="footer">
-      <div className="container footer-grid mono">
+      <div className="container footer-grid caps">
         <Logo className="footer-logo" title={site.fullName} />
         <span>{site.kind}<br />{site.areas}</span>
         <span>{site.city}<br />{site.state} — Brasil</span>
         <span>© {new Date().getFullYear()}<br />{site.fullName}</span>
-        <button className="link-mono" onClick={() => scrollToTarget('#inicio')}>Voltar ao topo ↑</button>
+        <button className="link-caps" onClick={() => scrollToTarget('#inicio')}>Voltar ao topo ↑</button>
       </div>
     </footer>
   );

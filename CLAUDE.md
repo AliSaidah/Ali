@@ -61,6 +61,11 @@ O usuário não quer sites parecidos entre si. Antes de desenhar um site novo, l
 - **estrutura:** ordem e tipo das seções, grid, como o hero é montado;
 - **tipografia:** outro par de fontes (não repita família de display);
 - **paleta:** outra base (clara/escura) e outros acentos;
+
+Diferente não quer dizer ignorar a marca: fontes e cores precisam conversar com a
+identidade do cliente (logo, materiais, espaço físico) e com o padrão premium. Na TRIA,
+uma versão minimalista e "futurista" (grotesca + mono, cores frias) foi rejeitada por não
+combinar com a marca.
 - **abertura:** outro jeito de entrar (ou nenhuma abertura);
 - **"momento uau":** outra ideia, nascida do conceito do cliente;
 - **componentes-assinatura:** não repita os listados no registro (ex.: orbe com texto
@@ -73,7 +78,7 @@ Ao terminar, acrescente uma linha ao registro.
 | Site | Direção | Fontes | Paleta | Abertura | Momento uau e assinaturas |
 |---|---|---|---|---|---|
 | `carolina-baron` | "Noir & champagne", cinematográfico escuro | Bodoni Moda + Manrope | noir, champagne, nude; pausas marfim | nome letra a letra + contador 000–100, sai como cortina | seda líquida em WebGL; seção do método travada com rolagem horizontal; marquee reativo; lista com card seguindo o cursor; foto em arco; orbe magnético com texto girando; logo gigante no rodapé; cursor personalizado; grão |
-| `tria-clinica` | "Dois círculos, um cuidado", arquitetônico claro com grade aparente | Hanken Grotesk + IBM Plex Mono | pedra, argila (beleza), sálvia (mente); cobre só no logo | dois círculos se encontram, logo surge na interseção, sai por círculo que se fecha | círculos de Venn que se fundem em seção travada; texto que "ganha foco" (blur); marca-texto na rolagem; cartões empilhados (sticky); foto que nasce de um círculo e toma a tela; linhas de contato que se preenchem; legendas em mono numeradas |
+| `tria-clinica` | "Dois círculos, um cuidado", claro e premium, seguindo a identidade da clínica | Marcellus + Montserrat (caixa alta espaçada) | linho, conhaque (beleza), cimento queimado (mente), cobre metálico, café no rodapé | dois círculos se encontram, logo surge na interseção, sai por círculo que se fecha | círculos de Venn que se fundem em seção travada; texto que "ganha foco" (blur); marca-texto na rolagem; cartões empilhados (sticky); foto que nasce de um círculo e toma a tela; foto do hero em círculo com anel de cobre; linhas de contato que se preenchem |
 
 ## Repertório de movimento
 

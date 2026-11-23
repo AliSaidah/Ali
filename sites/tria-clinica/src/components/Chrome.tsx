@@ -72,7 +72,7 @@ export function Nav({ ready }: { ready: boolean }) {
           </a>
           <ul className="nav-links">
             {links.map((l, i) => (
-              <li key={l.href}><a href={l.href} onClick={(e) => go(e, l.href)}><span className="mono-idx">0{i + 1}</span>{l.label}</a></li>
+              <li key={l.href}><a href={l.href} onClick={(e) => go(e, l.href)}><span className="idx">0{i + 1}</span>{l.label}</a></li>
             ))}
           </ul>
           <a className="nav-cta" href={contact.href} target="_blank" rel="noopener noreferrer">Fale conosco ↗</a>
@@ -84,12 +84,12 @@ export function Nav({ ready }: { ready: boolean }) {
       <div id="menu" className="menu" hidden={!open}>
         <ul className="menu-links">
           {links.map((l, i) => (
-            <li key={l.href}><a href={l.href} onClick={(e) => go(e, l.href)}><span className="mono-idx">0{i + 1}</span>{l.label}</a></li>
+            <li key={l.href}><a href={l.href} onClick={(e) => go(e, l.href)}><span className="idx">0{i + 1}</span>{l.label}</a></li>
           ))}
         </ul>
         <div className="menu-foot">
           <a href={contact.href} target="_blank" rel="noopener noreferrer" className="btn">Fale conosco ↗</a>
-          <p className="mono">{site.kind} — {site.city}, {site.state}</p>
+          <p className="caps">{site.kind} — {site.city}, {site.state}</p>
         </div>
       </div>
     </>
