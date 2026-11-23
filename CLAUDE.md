@@ -78,7 +78,7 @@ Ao terminar, acrescente uma linha ao registro.
 | Site | Direção | Fontes | Paleta | Abertura | Momento uau e assinaturas |
 |---|---|---|---|---|---|
 | `carolina-baron` | "Noir & champagne", cinematográfico escuro | Bodoni Moda + Manrope | noir, champagne, nude; pausas marfim | nome letra a letra + contador 000–100, sai como cortina | seda líquida em WebGL; seção do método travada com rolagem horizontal; marquee reativo; lista com card seguindo o cursor; foto em arco; orbe magnético com texto girando; logo gigante no rodapé; cursor personalizado; grão |
-| `tria-clinica` | "Dois círculos, um cuidado", claro e premium, seguindo a identidade da clínica | Marcellus + Montserrat (caixa alta espaçada) | linho, conhaque (beleza), cimento queimado (mente), cobre metálico, café no rodapé | dois círculos se encontram, logo surge na interseção, sai por círculo que se fecha | círculos de Venn que se fundem (animação automática ao entrar na tela; a versão travada no scroll ficou lenta e foi rejeitada); texto que "ganha foco" (blur); marca-texto na rolagem; cartões empilhados (sticky); foto que nasce de um círculo e toma a tela; foto do hero em círculo com anel de cobre; serviços em duas colunas com bolinhas conhaque e cimento; linhas de contato que se preenchem |
+| `tria-clinica` | "Mente · Face · Corpo", três círculos que viram um; claro e premium, seguindo a identidade da clínica | Marcellus + Montserrat (caixa alta espaçada) | linho, cimento queimado (mente), conhaque (face), carvalho (corpo), cobre metálico, café no rodapé | três círculos se encontram e se fundem, logo surge no centro, sai por círculo que se fecha | diagrama de três círculos que se fundem (animação automática ao entrar na tela; a versão travada no scroll ficou lenta e foi rejeitada); texto que "ganha foco" (blur); marca-texto na rolagem; quatro cartões empilhados (sticky); galeria em que cada foto nasce de um círculo; foto do hero em círculo com anel de cobre; serviços em três colunas com bolinhas nas cores das frentes; linhas de contato que se preenchem |
 
 ## Repertório de movimento
 
@@ -129,11 +129,14 @@ lateral e com botão flutuante de contato) e mantenha os alvos de toque com 44px
 O usuário vende assim: cria o site, manda o link para o dono do negócio e pergunta se ele quer comprar.
 
 - Todo site novo começa em **modo prévia**:
-  - `preview.enabled = true` em `src/content.ts`, com o nome e o WhatsApp da agência;
+  - `preview.enabled = true` em `src/content.ts`, com o nome e o WhatsApp da agência
+    (WhatsApp da agência: `5511932114092`; nome da agência ainda não definido);
   - meta `robots` `noindex, nofollow` no `index.html`.
   O selo "Prévia feita para você" traz o botão "Quero este site", que abre o WhatsApp da agência.
 - Gere o build (`npx vite build`), compacte o **conteúdo** de `dist/` num .zip e envie ao usuário.
-  Ele publica pelo Netlify Drop (app.netlify.com/drop), arrastando a pasta, e manda o link ao cliente.
+  Ele publica de graça pela **Cloudflare Pages** (Workers & Pages → Create → Pages → Upload assets),
+  que permite uso comercial e não tem marca d'água (Netlify Drop também serve), e manda o link ao cliente.
+  Na demonstração com dados fictícios, deixe `preview.whatsapp` vazio (é o número real do usuário).
   Quem publica é o usuário, na conta dele. Claude não publica a versão com dados reais.
 - Quando o cliente comprar: `preview.enabled = false`, remova a meta `robots`, peça as fotos
   originais e a autorização de uso, e coloque no domínio do cliente.

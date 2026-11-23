@@ -74,7 +74,7 @@ export const site = {
 export const preview = {
   enabled: true,
   agency: '', // nome da sua agência (opcional)
-  whatsapp: '', // seu WhatsApp com DDI e DDD, ex.: 5517999999999
+  whatsapp: '5511932114092', // WhatsApp da agência (DDI + DDD + número)
 };
 
 export const categories: Category[] = ['Contorno', 'Rejuvenescimento', 'Preenchimentos', 'Cuidado'];

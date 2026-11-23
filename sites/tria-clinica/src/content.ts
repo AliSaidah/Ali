@@ -20,34 +20,26 @@ export const site = {
   visit: 'Venha conhecer a clínica e conversar com a nossa equipe.',
   caption: 'Um novo olhar sobre o cuidado.',
 
-  // CONFIRMAR: lista padrão de serviços. Ajustar com a clínica o que é oferecido de fato.
-  services: {
-    estetica: [
-      'Harmonização facial',
-      'Toxina botulínica',
-      'Preenchimento com ácido hialurônico',
-      'Bioestimuladores de colágeno',
-      'Skinbooster',
-      'Limpeza de pele',
-      'Peelings',
-    ],
-    mente: [
-      'Psicoterapia individual',
-      'Terapia de casal',
-      'Atendimento a adolescentes',
-      'Ansiedade e estresse',
-      'Autoestima e imagem corporal',
-      'Avaliação psicológica',
-      'Atendimento on-line',
-    ],
-  },
-
-  // CONFIRMAR: textos curtos de apresentação de cada frente.
-  pillars: [
-    { title: 'Beleza', text: 'Cuidar da aparência com técnica, planejamento e naturalidade, valorizando o que já é seu.' },
-    { title: 'Saúde mental', text: 'Um espaço de escuta e acolhimento para as suas emoções, a sua história e o seu momento.' },
-    { title: 'Integração', text: 'Diferentes caminhos de cuidado em uma experiência mais completa, individualizada e conectada.' },
+  // As três frentes da inscrição da recepção: Mente · Face · Corpo.
+  // CONFIRMAR: textos curtos e listas padrão de serviços; ajustar com a clínica.
+  fronts: [
+    {
+      key: 'mente', title: 'Mente', area: 'Saúde mental',
+      text: 'Um espaço de escuta e acolhimento para as suas emoções, a sua história e o seu momento.',
+      services: ['Psicoterapia individual', 'Terapia de casal', 'Atendimento a adolescentes', 'Ansiedade e estresse', 'Autoestima e imagem corporal', 'Avaliação psicológica', 'Atendimento on-line'],
+    },
+    {
+      key: 'face', title: 'Face', area: 'Estética facial',
+      text: 'Estética facial com técnica, planejamento e naturalidade, valorizando o que já é seu.',
+      services: ['Harmonização facial', 'Toxina botulínica', 'Preenchimento com ácido hialurônico', 'Bioestimuladores de colágeno', 'Skinbooster', 'Limpeza de pele', 'Peelings'],
+    },
+    {
+      key: 'corpo', title: 'Corpo', area: 'Estética corporal',
+      text: 'Cuidados corporais para o bem-estar, a autoestima e a saúde da pele.',
+      services: ['Drenagem linfática', 'Massagem modeladora', 'Massagem relaxante', 'Gordura localizada', 'Celulite', 'Flacidez corporal', 'Estrias'],
+    },
   ],
+  integration: 'Diferentes caminhos de cuidado em uma experiência mais completa, individualizada e conectada.',
 
   instagram: { handle: '@clinicaintegradatria', url: 'https://www.instagram.com/clinicaintegradatria' },
   // CONFIRMAR: WhatsApp da clínica com DDI e DDD (ex.: 5517999999999). Vazio = botões levam ao Direct do Instagram.
@@ -67,7 +59,7 @@ export const site = {
 export const preview = {
   enabled: true,
   agency: '', // nome da sua agência (opcional)
-  whatsapp: '', // seu WhatsApp com DDI e DDD, ex.: 5517999999999
+  whatsapp: '5511932114092', // WhatsApp da agência (DDI + DDD + número)
 };
 
 const contactText = 'Olá! Vi o site da Clínica Tria e gostaria de saber mais.';

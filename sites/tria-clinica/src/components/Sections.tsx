@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { gsap, useGSAP, SplitText, reducedMotion, scrollToTarget } from '../lib/motion';
 import { site, contact, contactAbout } from '../content';
 import { Logo } from './Logo';
+import { TRIAD } from '../lib/circles';
 
 /* Vocabulário de movimento deste site: textos que "ganham foco" (blur → nítido),
    marca-texto na rolagem, círculos que se fundem, cartões que se empilham. */
@@ -89,30 +90,28 @@ export function Concept() {
   );
 }
 
-/* ---------- Integração: dois círculos que viram um ---------- */
+/* ---------- Integração: mente, face e corpo, três círculos que viram um ---------- */
 export function Venn() {
   const ref = useRef<HTMLElement>(null);
 
   useGSAP(() => {
+    // Posição de repouso (também para quem prefere menos movimento): o diagrama de três círculos.
+    TRIAD.forEach((c) => gsap.set(`.vc--${c.key}`, { xPercent: c.x, yPercent: c.y }));
     const mm = gsap.matchMedia();
     mm.add({ wide: '(min-width: 900px)', motion: '(prefers-reduced-motion: no-preference)' }, (ctx) => {
       const { wide, motion } = ctx.conditions as { wide: boolean; motion: boolean };
       if (!motion) return;
-      const axis = wide ? 'xPercent' : 'yPercent';
-      const far = wide ? 88 : 64;
-      const lens = wide ? 34 : 30;
+      const far = wide ? 2.6 : 1.7;
       // Toca sozinha, rápida, quando a seção entra na tela (sem travar a rolagem).
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: '.venn-field', start: 'top 70%', toggleActions: 'play none none none' },
+      const tl = gsap.timeline({ scrollTrigger: { trigger: '.venn-field', start: 'top 70%', toggleActions: 'play none none none' } });
+      TRIAD.forEach((c) => {
+        tl.fromTo(`.vc--${c.key}`, { xPercent: c.x * far, yPercent: c.y * far }, { xPercent: c.x, yPercent: c.y, duration: 0.9, ease: 'power3.out' }, 0);
       });
-      tl.fromTo('.vc--a', { [axis]: -far }, { [axis]: -lens, duration: 0.9, ease: 'power3.out' })
-        .fromTo('.vc--b', { [axis]: far }, { [axis]: lens, duration: 0.9, ease: 'power3.out' }, 0)
-        .fromTo('.venn-core', { autoAlpha: 0, scale: 0.4 }, { autoAlpha: 1, scale: 0.55, duration: 0.4, ease: 'power2.out' }, 0.55)
-        .to('.vc-label', { autoAlpha: 0, duration: 0.3 }, 0.95)
-        .to('.vc--a', { [axis]: 0, duration: 0.8, ease: 'power3.inOut' }, 1.0)
-        .to('.vc--b', { [axis]: 0, duration: 0.8, ease: 'power3.inOut' }, 1.0)
-        .to('.venn-core', { scale: 1, duration: 0.8, ease: 'power3.inOut' }, 1.0)
-        .fromTo('.venn-text', { autoAlpha: 0, filter: 'blur(10px)', y: 20 }, { autoAlpha: 1, filter: 'blur(0px)', y: 0, duration: 0.7, ease: 'power2.out', clearProps: 'filter' }, 1.6);
+      tl.fromTo('.venn-core', { autoAlpha: 0, scale: 0.4 }, { autoAlpha: 1, scale: 0.5, duration: 0.4, ease: 'power2.out' }, 0.6)
+        .to('.vc-label', { autoAlpha: 0, duration: 0.3 }, 1.0)
+        .to('.vc', { xPercent: 0, yPercent: 0, duration: 0.8, ease: 'power3.inOut' }, 1.05)
+        .to('.venn-core', { scale: 1, duration: 0.8, ease: 'power3.inOut' }, 1.05)
+        .fromTo('.venn-text', { autoAlpha: 0, filter: 'blur(10px)', y: 20 }, { autoAlpha: 1, filter: 'blur(0px)', y: 0, duration: 0.7, ease: 'power2.out', clearProps: 'filter' }, 1.65);
     });
     return () => mm.revert();
   }, { scope: ref });
@@ -122,18 +121,17 @@ export function Venn() {
       <div className="venn-stage container">
         <p className="sec-label caps"><span className="idx">03</span>Integração</p>
         <div className="venn-field">
-          <div className="vc vc--a">
-            <span className="vc-label"><b>Beleza</b><small className="caps">Aparência</small></span>
-          </div>
-          <div className="vc vc--b">
-            <span className="vc-label"><b>Saúde mental</b><small className="caps">Mente</small></span>
-          </div>
+          {site.fronts.map((f) => (
+            <div key={f.key} className={`vc vc--${f.key}`}>
+              <span className="vc-label"><b>{f.title}</b><small className="caps">{f.area}</small></span>
+            </div>
+          ))}
           <div className="venn-core">
             <Logo solid="#F6EFE6" title="Tria" />
-            <span className="caps">Cuidado integrado</span>
+            <span className="caps">{site.motto}</span>
           </div>
         </div>
-        <p className="venn-text">{site.pillars[2].text}</p>
+        <p className="venn-text">{site.integration}</p>
       </div>
     </section>
   );
@@ -161,7 +159,11 @@ export function Pillars() {
     });
   }, { scope: ref });
 
-  const tone = ['cognac', 'cement', 'espresso'];
+  const tone = ['cement', 'cognac', 'oak', 'espresso'];
+  const cards = [
+    ...site.fronts.map((f) => ({ title: f.title, text: f.text, tag: f.area })),
+    { title: 'Integração', text: site.integration, tag: 'O que nos une' },
+  ];
   return (
     <section ref={ref} className="pillars section" id="cuidado">
       <div className="container">
@@ -170,12 +172,12 @@ export function Pillars() {
           <h2 className="pillars-title">O indivíduo em sua totalidade.</h2>
         </div>
         <div className="cards">
-          {site.pillars.map((p, i) => (
+          {cards.map((p, i) => (
             <article className={`card card--${tone[i]}`} key={p.title} style={{ '--i': i } as React.CSSProperties}>
               <span className="card-dim" aria-hidden="true" />
               <div className="card-top caps">
-                <span>{String(i + 1).padStart(2, '0')} / 03</span>
-                <span>{i < 2 ? 'Frente de cuidado' : 'O que nos une'}</span>
+                <span>{String(i + 1).padStart(2, '0')} / {String(cards.length).padStart(2, '0')}</span>
+                <span>{p.tag}</span>
               </div>
               <div className="card-body">
                 <h3 className="card-title">{p.title}</h3>
@@ -202,22 +204,19 @@ export function Services() {
     });
   }, { scope: ref });
 
-  const cols = [
-    { key: 'beleza', title: 'Estética', sub: 'Beleza', items: site.services.estetica },
-    { key: 'mente', title: 'Saúde mental', sub: 'Mente', items: site.services.mente },
-  ];
+  const cols = site.fronts.map((f) => ({ key: f.key, title: f.title, sub: f.area, items: f.services }));
   return (
     <section ref={ref} className="services section" id="servicos">
       <div className="container">
         <p className="sec-label caps"><span className="idx">05</span>Serviços</p>
-        <h2 className="services-title">Cuidados para a aparência e para a mente.</h2>
+        <h2 className="services-title">Cuidados para a mente, o rosto e o corpo.</h2>
         <div className="services-grid">
           {cols.map((c) => (
             <div className={`svc-col svc-col--${c.key}`} key={c.key}>
               <div className="svc-head">
                 <span className="svc-dot" aria-hidden="true" />
                 <h3 className="svc-title">{c.title}</h3>
-                <span className="caps svc-sub">{c.sub} · {String(c.items.length).padStart(2, '0')}</span>
+                <span className="caps svc-sub">{c.sub}</span>
               </div>
               <ul className="svc-list">
                 {c.items.map((name, i) => (
