@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { gsap, useGSAP, SplitText, reducedMotion, scrollToTarget } from '../lib/motion';
 import { site, contact, contactAbout } from '../content';
 import { Logo } from './Logo';
+import { Arrow } from './Arrow';
 import { TRIAD } from '../lib/circles';
 
 /* Vocabulário de movimento deste site: textos que "ganham foco" (blur → nítido),
@@ -53,8 +54,8 @@ export function Hero({ ready }: { ready: boolean }) {
           </figure>
         </div>
         <div className="hero-actions">
-          <a className="btn" href={contact.href} target="_blank" rel="noopener noreferrer">Agende sua visita ↗</a>
-          <a className="link-caps" href="#conceito" onClick={(e) => { e.preventDefault(); scrollToTarget('#conceito'); }}>Conheça o conceito ↓</a>
+          <a className="btn" href={contact.href} target="_blank" rel="noopener noreferrer">Agende sua visita <Arrow /></a>
+          <a className="link-caps" href="#conceito" onClick={(e) => { e.preventDefault(); scrollToTarget('#conceito'); }}>Conheça o conceito <Arrow dir="down" /></a>
         </div>
       </div>
     </section>
@@ -224,7 +225,7 @@ export function Services() {
                     <a className="svc-item" href={contactAbout(name)} target="_blank" rel="noopener noreferrer">
                       <span className="svc-n">{String(i + 1).padStart(2, '0')}</span>
                       <span className="svc-name">{name}</span>
-                      <span className="svc-go" aria-hidden="true">↗</span>
+                      <span className="svc-go" aria-hidden="true"><Arrow /></span>
                     </a>
                   </li>
                 ))}
@@ -302,12 +303,12 @@ export function Contact() {
           <a className="row" href={site.instagram.url} target="_blank" rel="noopener noreferrer">
             <span className="row-k caps">Instagram</span>
             <span className="row-v">{site.instagram.handle}</span>
-            <span className="row-go" aria-hidden="true">↗</span>
+            <span className="row-go" aria-hidden="true"><Arrow /></span>
           </a>
           <a className="row row--taupe" href={contact.href} target="_blank" rel="noopener noreferrer">
             <span className="row-k caps">{contact.kind === 'whatsapp' ? 'WhatsApp' : 'Mensagem direta'}</span>
             <span className="row-v">Fale com a Tria</span>
-            <span className="row-go" aria-hidden="true">↗</span>
+            <span className="row-go" aria-hidden="true"><Arrow /></span>
           </a>
         </div>
       </div>
@@ -324,7 +325,7 @@ export function Footer() {
         <span>{site.kind}<br />{site.areas}</span>
         <span>{site.city}<br />{site.state} — Brasil</span>
         <span>© {new Date().getFullYear()}<br />{site.fullName}</span>
-        <button className="link-caps" onClick={() => scrollToTarget('#inicio')}>Voltar ao topo ↑</button>
+        <button className="link-caps" onClick={() => scrollToTarget('#inicio')}>Voltar ao topo <Arrow dir="up" /></button>
       </div>
     </footer>
   );

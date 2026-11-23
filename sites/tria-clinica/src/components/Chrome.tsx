@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { gsap, useGSAP, ScrollTrigger, reducedMotion, scrollToTarget } from '../lib/motion';
 import { site, contact } from '../content';
 import { Logo } from './Logo';
+import { Arrow } from './Arrow';
 import { TRIAD } from '../lib/circles';
 
 /* ---------- Abertura: três círculos (mente, face, corpo) se encontram e viram um ---------- */
@@ -78,7 +79,7 @@ export function Nav({ ready }: { ready: boolean }) {
               <li key={l.href}><a href={l.href} onClick={(e) => go(e, l.href)}><span className="idx">0{i + 1}</span>{l.label}</a></li>
             ))}
           </ul>
-          <a className="nav-cta" href={contact.href} target="_blank" rel="noopener noreferrer">Fale conosco ↗</a>
+          <a className="nav-cta" href={contact.href} target="_blank" rel="noopener noreferrer">Fale conosco <Arrow /></a>
           <button className="menu-btn" aria-expanded={open} aria-controls="menu" onClick={() => setOpen(!open)}>
             {open ? 'Fechar' : 'Menu'}
           </button>
@@ -91,7 +92,7 @@ export function Nav({ ready }: { ready: boolean }) {
           ))}
         </ul>
         <div className="menu-foot">
-          <a href={contact.href} target="_blank" rel="noopener noreferrer" className="btn">Fale conosco ↗</a>
+          <a href={contact.href} target="_blank" rel="noopener noreferrer" className="btn">Fale conosco <Arrow /></a>
           <p className="caps">{site.kind} — {site.city}, {site.state}</p>
         </div>
       </div>

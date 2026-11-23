@@ -3,6 +3,7 @@ import { startLenis, getLenis, ScrollTrigger } from './lib/motion';
 import { Intro, Nav } from './components/Chrome';
 import { Hero, Concept, Venn, Pillars, Services, Space, Contact, Footer } from './components/Sections';
 import { contact, preview, site } from './content';
+import { Arrow } from './components/Arrow';
 
 function PreviewBadge() {
   if (!preview.enabled) return null;
@@ -67,7 +68,7 @@ export default function App() {
       )}
       <PreviewBadge />
       <a className="float-cta" href={contact.href} target="_blank" rel="noopener noreferrer" aria-label="Falar com a Clínica Tria">
-        Contato <span aria-hidden="true">↗</span>
+        Contato <span aria-hidden="true"><Arrow /></span>
       </a>
     </>
   );
