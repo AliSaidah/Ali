@@ -133,11 +133,27 @@ O usuário vende assim: cria o site, manda o link para o dono do negócio e perg
     (WhatsApp da agência: `5511932114092`; nome da agência ainda não definido);
   - meta `robots` `noindex, nofollow` no `index.html`.
   O selo "Prévia feita para você" traz o botão "Quero este site", que abre o WhatsApp da agência.
-- Gere o build (`npx vite build`), compacte o **conteúdo** de `dist/` num .zip e envie ao usuário.
-  Ele publica de graça pela **Cloudflare Pages** (Workers & Pages → Create → Pages → Upload assets),
-  que permite uso comercial e não tem marca d'água (Netlify Drop também serve), e manda o link ao cliente.
-  Na demonstração com dados fictícios, deixe `preview.whatsapp` vazio (é o número real do usuário).
-  Quem publica é o usuário, na conta dele. Claude não publica a versão com dados reais.
+- **Publicação (Cloudflare Pages, conta do usuário):**
+  - Claude só publica **depois de o usuário autorizar aquela publicação** na conversa
+    ("pode subir a TRIA"). Autorização vale só para o que foi pedido, uma vez; alteração
+    nova precisa de nova autorização. Sem autorização, só prepare e mostre.
+  - Cada site tem o script `npm run deploy` (build + `wrangler pages deploy dist
+    --project-name=<pasta> --branch=main`). O nome do projeto é sempre o nome da pasta
+    em `sites/`, e o link fica `https://<pasta>.pages.dev` (se o nome já existir na Cloudflare,
+    ela acrescenta um sufixo; anote o link real na tabela).
+  - Credencial: token de API da Cloudflare salvo no ambiente (host `api.cloudflare.com`).
+    Rode com `CLOUDFLARE_API_TOKEN=proxy` e `CLOUDFLARE_ACCOUNT_ID` (o proxy injeta o token real).
+  - Depois de publicar, abra o link, confira no celular (iPhone 13) e atualize a tabela
+    **Publicações** abaixo.
+  - Demonstração com dados fictícios continua como Artifact, com `preview.whatsapp` vazio.
+
+### Publicações
+
+| Site | Projeto Cloudflare | Link | Situação | Última publicação |
+|---|---|---|---|---|
+| `carolina-baron` | `carolina-baron` | (definido na 1ª publicação) | prévia, não publicada | — |
+| `tria-clinica` | `tria-clinica` | (definido na 1ª publicação) | prévia, não publicada | — |
+
 - Quando o cliente comprar: `preview.enabled = false`, remova a meta `robots`, peça as fotos
   originais e a autorização de uso, e coloque no domínio do cliente.
 
