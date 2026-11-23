@@ -240,29 +240,28 @@ export function Space() {
 
   useGSAP(() => {
     if (reducedMotion) return;
-    const tl = gsap.timeline({
-      defaults: { ease: 'none' },
-      scrollTrigger: { trigger: '.space-pin', start: 'top top', end: '+=140%', pin: true, scrub: 1, anticipatePin: 1 },
-    });
-    tl.fromTo('.space-media', { clipPath: 'circle(16% at 50% 50%)' }, { clipPath: 'circle(75% at 50% 50%)', duration: 1, ease: 'power2.inOut' })
-      .fromTo('.space-media img', { scale: 1.35 }, { scale: 1, duration: 1, ease: 'power2.inOut' }, 0)
-      .fromTo('.space-shade', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, 0.6)
-      .from('.space-overlay > *', { autoAlpha: 0, filter: 'blur(12px)', y: 20, stagger: 0.1, duration: 0.4 }, 0.75)
-      .to({}, { duration: 0.25 });
+    // Toca sozinha quando o quadro entra na tela (sem travar a rolagem).
+    const tl = gsap.timeline({ scrollTrigger: { trigger: '.space-pin', start: 'top 72%', toggleActions: 'play none none none' } });
+    tl.fromTo('.space-media', { clipPath: 'circle(14% at 50% 50%)' }, { clipPath: 'circle(75% at 50% 50%)', duration: 1.4, ease: 'power3.inOut' })
+      .fromTo('.space-media img', { scale: 1.3 }, { scale: 1, duration: 1.6, ease: 'power3.out' }, 0)
+      .fromTo('.space-shade', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, 0.8)
+      .fromTo('.space-overlay > *', { autoAlpha: 0, filter: 'blur(12px)', y: 20 }, { autoAlpha: 1, filter: 'blur(0px)', y: 0, stagger: 0.12, duration: 0.8, ease: 'power2.out' }, 1.0);
     gsap.from('.space-info > *', { autoAlpha: 0, y: 30, duration: 1, ease: 'power3.out', stagger: 0.1, scrollTrigger: { trigger: '.space-info', start: 'top 85%' } });
   }, { scope: ref });
 
   return (
     <section ref={ref} className="space" id="espaco">
+      <div className="container space-frame-wrap">
       <div className="space-pin">
         <div className="space-media">
           <img src={site.photo} alt="Recepção da Clínica Tria: balcão de mármore e madeira, lustre dourado e parede em cimento queimado" loading="lazy" />
           <div className="space-shade" />
         </div>
-        <div className="space-overlay container">
+        <div className="space-overlay">
           <p className="sec-label caps"><span className="idx">06</span>O espaço</p>
           <h2 className="space-title">Um espaço pensado para o seu cuidado.</h2>
         </div>
+      </div>
       </div>
       <div className="container space-info">
         <p className="space-text">{site.space}</p>
