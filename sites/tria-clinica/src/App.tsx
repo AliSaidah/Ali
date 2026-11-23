@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { startLenis, getLenis, ScrollTrigger } from './lib/motion';
-import { Preloader, Cursor, Nav, Atmosphere } from './components/Chrome';
-import { Hero, Concept, Integration, Pillars, Space, Marquee, Cta, Footer } from './components/Sections';
-import { Icon } from './components/ui';
+import { Intro, Nav } from './components/Chrome';
+import { Hero, Concept, Venn, Pillars, Space, Contact, Footer } from './components/Sections';
 import { contact, preview, site } from './content';
 
 function PreviewBadge() {
@@ -47,13 +46,9 @@ export default function App() {
     return () => { clearTimeout(id); st.kill(); };
   }, [ready]);
 
-  const FloatIcon = contact.kind === 'whatsapp' ? Icon.WhatsApp : Icon.Instagram;
-
   return (
     <>
-      <Preloader onDone={() => setReady(true)} />
-      <Cursor />
-      <Atmosphere />
+      <Intro onDone={() => setReady(true)} />
       <a className="skip" href="#conceito">Pular para o conteúdo</a>
       <Nav ready={ready} />
       {fonts && (
@@ -61,18 +56,17 @@ export default function App() {
           <main>
             <Hero ready={ready} />
             <Concept />
-            <Integration />
+            <Venn />
             <Pillars />
             <Space />
-            <Marquee />
-            <Cta />
+            <Contact />
           </main>
           <Footer />
         </>
       )}
       <PreviewBadge />
-      <a className="float-wa" href={contact.href} target="_blank" rel="noopener noreferrer" aria-label="Falar com a Clínica Tria">
-        <FloatIcon /> <span>Fale conosco</span>
+      <a className="float-cta" href={contact.href} target="_blank" rel="noopener noreferrer" aria-label="Falar com a Clínica Tria">
+        Contato <span aria-hidden="true">↗</span>
       </a>
     </>
   );

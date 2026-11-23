@@ -48,14 +48,37 @@ Antes de escrever código:
 - WebGL próprio para fundos vivos quando fizer sentido (ex.: `SilkCanvas.tsx`).
 - Fontes via `@fontsource` (auto-hospedadas), nunca de CDN em tempo de execução.
 - Todo o conteúdo do cliente em `src/content.ts`; cores em tokens no topo de `src/styles.css`.
-  Para um cliente novo, partir de um site existente e trocar conteúdo, direção e
-  componentes que não combinam.
+- De um site anterior, reaproveite **só a infraestrutura**: `package.json`, `vite.config.ts`,
+  `tsconfig.json`, `src/lib/motion.ts` (GSAP + Lenis), o padrão de `content.ts`, o selo de
+  prévia e a lógica de carregamento de fontes. Seções, layout, CSS, fontes, paleta, abertura
+  e movimento são escritos do zero para cada cliente.
 
-Referência: `sites/carolina-baron/` (estética avançada, direção "noir & champagne").
+## Cada site é único
+
+O usuário não quer sites parecidos entre si. Antes de desenhar um site novo, leia o
+**Registro de sites** abaixo e garanta que o novo seja diferente de todos os anteriores em:
+
+- **estrutura:** ordem e tipo das seções, grid, como o hero é montado;
+- **tipografia:** outro par de fontes (não repita família de display);
+- **paleta:** outra base (clara/escura) e outros acentos;
+- **abertura:** outro jeito de entrar (ou nenhuma abertura);
+- **"momento uau":** outra ideia, nascida do conceito do cliente;
+- **componentes-assinatura:** não repita os listados no registro (ex.: orbe com texto
+  girando, marquee, foto em arco, logo gigante no rodapé, cursor personalizado).
+
+Ao terminar, acrescente uma linha ao registro.
+
+### Registro de sites
+
+| Site | Direção | Fontes | Paleta | Abertura | Momento uau e assinaturas |
+|---|---|---|---|---|---|
+| `carolina-baron` | "Noir & champagne", cinematográfico escuro | Bodoni Moda + Manrope | noir, champagne, nude; pausas marfim | nome letra a letra + contador 000–100, sai como cortina | seda líquida em WebGL; seção do método travada com rolagem horizontal; marquee reativo; lista com card seguindo o cursor; foto em arco; orbe magnético com texto girando; logo gigante no rodapé; cursor personalizado; grão |
+| `tria-clinica` | "Dois círculos, um cuidado", arquitetônico claro com grade aparente | Hanken Grotesk + IBM Plex Mono | pedra, argila (beleza), sálvia (mente); cobre só no logo | dois círculos se encontram, logo surge na interseção, sai por círculo que se fecha | círculos de Venn que se fundem em seção travada; texto que "ganha foco" (blur); marca-texto na rolagem; cartões empilhados (sticky); foto que nasce de um círculo e toma a tela; linhas de contato que se preenchem; legendas em mono numeradas |
 
 ## Repertório de movimento
 
-Escolha o que combina com cada cliente, sem usar tudo sempre:
+São exemplos, não uma lista para seguir. Escolha poucos, combine com o conceito do cliente,
+invente novos e evite o que já está no registro acima:
 
 - **Entrada:** tela de carregamento curta, com nome e contador, saindo como cortina.
 - **Títulos:**
@@ -82,7 +105,9 @@ lateral e com botão flutuante de contato) e mantenha os alvos de toque com 44px
      envie. Isso mostra as animações.
   2. **Link de demonstração:** gere um build de arquivo único (`vite-plugin-singlefile`)
      com **nome, contatos e fotos fictícios** e publique como Artifact. Não publique
-     link com nome, fotos ou contatos de uma pessoa ou empresa real.
+     link com nome, fotos ou contatos de uma pessoa ou empresa real. No build de arquivo
+     único, importe as imagens no código (`import foto from './foto.jpg'`), porque
+     caminhos de `public/` não são embutidos.
   3. A versão real fica em `sites/<cliente>/`. Para rodar localmente:
      `npm install` e depois `npm run dev`, abrindo http://localhost:5173.
 ## Fluxo de venda (prévia de proposta)
