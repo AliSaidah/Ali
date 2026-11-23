@@ -152,7 +152,7 @@ O usuário vende assim: cria o site, manda o link para o dono do negócio e perg
 | Site | Projeto Cloudflare | Link | Situação | Última publicação |
 |---|---|---|---|---|
 | `carolina-baron` | `carolina-baron` | (definido na 1ª publicação) | prévia, não publicada | — |
-| `tria-clinica` | `tria-clinica` | (definido na 1ª publicação) | prévia, não publicada | — |
+| `tria-clinica` | `tria-clinica` (Pages, upload manual do zip) | https://tria-clinica.pages.dev | prévia publicada, link pronto para enviar à clínica | 2026-11-23 |
 
 - Quando o cliente comprar: `preview.enabled = false`, remova a meta `robots`, peça as fotos
   originais e a autorização de uso, e coloque no domínio do cliente.
