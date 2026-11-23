@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { startLenis, getLenis, ScrollTrigger } from './lib/motion';
 import { Intro, Nav } from './components/Chrome';
-import { Hero, Concept, Venn, Pillars, Space, Contact, Footer } from './components/Sections';
+import { Hero, Concept, Venn, Pillars, Services, Space, Contact, Footer } from './components/Sections';
 import { contact, preview, site } from './content';
 
 function PreviewBadge() {
@@ -58,6 +58,7 @@ export default function App() {
             <Concept />
             <Venn />
             <Pillars />
+            <Services />
             <Space />
             <Contact />
           </main>

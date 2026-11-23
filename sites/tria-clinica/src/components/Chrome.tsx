@@ -38,6 +38,7 @@ const links = [
   { href: '#conceito', label: 'Conceito' },
   { href: '#integracao', label: 'Integração' },
   { href: '#cuidado', label: 'Cuidado' },
+  { href: '#servicos', label: 'Serviços' },
   { href: '#espaco', label: 'Espaço' },
   { href: '#contato', label: 'Contato' },
 ];

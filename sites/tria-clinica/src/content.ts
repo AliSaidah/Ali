@@ -14,10 +14,31 @@ export const site = {
   concept:
     'A Clínica Tria é sobre compreender o indivíduo em sua totalidade, respeitando suas particularidades, necessidades e momentos.',
   space:
-    'Um novo espaço está sendo construído para unir diferentes caminhos de cuidado em uma experiência mais completa, individualizada e conectada.',
-  soon: 'Ainda estamos preparando tudo para receber você.',
-  closing: 'Uma nova forma de cuidar já começou a tomar forma por aqui.',
-  caption: 'Um novo olhar sobre o cuidado está tomando forma.',
+    'Um espaço criado para unir diferentes caminhos de cuidado em uma experiência mais completa, individualizada e conectada.',
+  visit: 'Venha conhecer a clínica e conversar com a nossa equipe.',
+  caption: 'Um novo olhar sobre o cuidado.',
+
+  // CONFIRMAR: lista padrão de serviços. Ajustar com a clínica o que é oferecido de fato.
+  services: {
+    estetica: [
+      'Harmonização facial',
+      'Toxina botulínica',
+      'Preenchimento com ácido hialurônico',
+      'Bioestimuladores de colágeno',
+      'Skinbooster',
+      'Limpeza de pele',
+      'Peelings',
+    ],
+    mente: [
+      'Psicoterapia individual',
+      'Terapia de casal',
+      'Atendimento a adolescentes',
+      'Ansiedade e estresse',
+      'Autoestima e imagem corporal',
+      'Avaliação psicológica',
+      'Atendimento on-line',
+    ],
+  },
 
   // CONFIRMAR: textos curtos de apresentação de cada frente.
   pillars: [
@@ -42,6 +63,11 @@ export const preview = {
 };
 
 const contactText = 'Olá! Vi o site da Clínica Tria e gostaria de saber mais.';
+
+export const contactAbout = (service: string) =>
+  site.whatsapp
+    ? `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`Olá! Gostaria de saber mais sobre ${service} na Clínica Tria.`)}`
+    : contact.href;
 
 export const contact = site.whatsapp
   ? { href: `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(contactText)}`, label: 'WhatsApp', kind: 'whatsapp' as const }

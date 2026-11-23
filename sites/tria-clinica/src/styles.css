@@ -216,6 +216,32 @@ mark { color: inherit; background: none; }
 .card-text { font-size: clamp(16px, 1.3vw, 19px); line-height: 1.6; max-width: 32ch; padding-bottom: 0.8em; }
 @media (max-width: 760px) { .card-body { grid-template-columns: 1fr; } .card { min-height: 62svh; border-radius: 18px; } }
 
+/* Serviços */
+.services { background: var(--linen); }
+.services-title { margin: clamp(40px, 5vw, 72px) 0 clamp(48px, 6vw, 88px); font-family: var(--f-display); font-size: clamp(40px, 5.6vw, 96px); line-height: 1.06; max-width: 15ch; text-wrap: balance; }
+.services-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 6vw, 96px); }
+.svc-head { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 20px; padding-bottom: 22px; border-bottom: 1px solid var(--line-cu); }
+.svc-dot { width: clamp(44px, 4vw, 60px); aspect-ratio: 1; border-radius: 50%; }
+.svc-col--beleza .svc-dot { background: radial-gradient(circle at 35% 30%, #DDB596, var(--cognac) 60%, #B88968); }
+.svc-col--mente .svc-dot { background: radial-gradient(circle at 35% 30%, #C3B8AD, var(--cement) 60%, #978A7F); }
+.svc-title { font-family: var(--f-display); font-size: clamp(30px, 3vw, 46px); line-height: 1; }
+.svc-sub { color: var(--muted-2); }
+.svc-item {
+  position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 16px;
+  min-height: 44px; padding: clamp(16px, 1.6vw, 22px) 0; border-bottom: 1px solid var(--line); isolation: isolate;
+}
+.svc-item::before { content: ''; position: absolute; inset: 0 -14px; z-index: -1; border-radius: 12px; opacity: 0; transition: opacity 0.4s; }
+.svc-col--beleza .svc-item::before { background: rgba(201, 156, 124, 0.18); }
+.svc-col--mente .svc-item::before { background: rgba(172, 159, 147, 0.2); }
+.svc-item:hover::before, .svc-item:focus-visible::before { opacity: 1; }
+.svc-n { font-family: var(--f-display); font-size: 15px; color: var(--copper); }
+.svc-name { font-family: var(--f-display); font-size: clamp(21px, 1.8vw, 28px); line-height: 1.2; transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.svc-go { color: var(--copper); font-size: 18px; opacity: 0.5; transition: opacity 0.4s, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.svc-item:hover .svc-name { transform: translateX(8px); }
+.svc-item:hover .svc-go { opacity: 1; transform: translate(4px, -4px); }
+.services-note { margin-top: 40px; color: var(--muted-2); }
+@media (max-width: 860px) { .services-grid { grid-template-columns: 1fr; } }
+
 /* O espaço */
 .space { position: relative; }
 .space-pin { position: relative; height: 100svh; overflow: hidden; background: var(--linen); }

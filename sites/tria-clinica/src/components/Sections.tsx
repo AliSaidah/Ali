@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { gsap, useGSAP, SplitText, reducedMotion, scrollToTarget } from '../lib/motion';
-import { site, contact } from '../content';
+import { site, contact, contactAbout } from '../content';
 import { Logo } from './Logo';
 
 /* Vocabulário de movimento deste site: textos que "ganham foco" (blur → nítido),
@@ -40,7 +40,7 @@ export function Hero({ ready }: { ready: boolean }) {
           <li><span className="idx">01</span>{site.kind}</li>
           <li>Beleza + saúde mental</li>
           <li>{site.city} — {site.state}</li>
-          <li><span className="dot" /> Em preparação</li>
+          <li><span className="dot" /> Agendamentos abertos</li>
         </ul>
         <h1 className="hero-title">
           Um novo conceito que integra <span className="c-copper">beleza</span> e <span className="c-taupe">mente.</span>
@@ -52,7 +52,7 @@ export function Hero({ ready }: { ready: boolean }) {
           </figure>
         </div>
         <div className="hero-actions">
-          <a className="btn" href={contact.href} target="_blank" rel="noopener noreferrer">Acompanhe a abertura ↗</a>
+          <a className="btn" href={contact.href} target="_blank" rel="noopener noreferrer">Agende sua visita ↗</a>
           <a className="link-caps" href="#conceito" onClick={(e) => { e.preventDefault(); scrollToTarget('#conceito'); }}>Conheça o conceito ↓</a>
         </div>
       </div>
@@ -101,19 +101,18 @@ export function Venn() {
       const axis = wide ? 'xPercent' : 'yPercent';
       const far = wide ? 88 : 64;
       const lens = wide ? 34 : 30;
+      // Toca sozinha, rápida, quando a seção entra na tela (sem travar a rolagem).
       const tl = gsap.timeline({
-        defaults: { ease: 'none' },
-        scrollTrigger: { trigger: ref.current, start: 'top top', end: '+=220%', pin: true, scrub: 1, anticipatePin: 1 },
+        scrollTrigger: { trigger: '.venn-field', start: 'top 70%', toggleActions: 'play none none none' },
       });
-      tl.fromTo('.vc--a', { [axis]: -far }, { [axis]: -lens, duration: 1, ease: 'power1.inOut' })
-        .fromTo('.vc--b', { [axis]: far }, { [axis]: lens, duration: 1, ease: 'power1.inOut' }, 0)
-        .fromTo('.venn-core', { autoAlpha: 0, scale: 0.4 }, { autoAlpha: 1, scale: 0.55, duration: 0.4 }, 0.75)
-        .to('.vc-label', { autoAlpha: 0, duration: 0.4 }, 1.15)
-        .to('.vc--a', { [axis]: 0, duration: 1, ease: 'power2.inOut' }, 1.2)
-        .to('.vc--b', { [axis]: 0, duration: 1, ease: 'power2.inOut' }, 1.2)
-        .to('.venn-core', { scale: 1, duration: 1, ease: 'power2.inOut' }, 1.2)
-        .from('.venn-text', { autoAlpha: 0, filter: 'blur(10px)', y: 20, duration: 0.5 }, 2.0)
-        .to({}, { duration: 0.35 });
+      tl.fromTo('.vc--a', { [axis]: -far }, { [axis]: -lens, duration: 0.9, ease: 'power3.out' })
+        .fromTo('.vc--b', { [axis]: far }, { [axis]: lens, duration: 0.9, ease: 'power3.out' }, 0)
+        .fromTo('.venn-core', { autoAlpha: 0, scale: 0.4 }, { autoAlpha: 1, scale: 0.55, duration: 0.4, ease: 'power2.out' }, 0.55)
+        .to('.vc-label', { autoAlpha: 0, duration: 0.3 }, 0.95)
+        .to('.vc--a', { [axis]: 0, duration: 0.8, ease: 'power3.inOut' }, 1.0)
+        .to('.vc--b', { [axis]: 0, duration: 0.8, ease: 'power3.inOut' }, 1.0)
+        .to('.venn-core', { scale: 1, duration: 0.8, ease: 'power3.inOut' }, 1.0)
+        .fromTo('.venn-text', { autoAlpha: 0, filter: 'blur(10px)', y: 20 }, { autoAlpha: 1, filter: 'blur(0px)', y: 0, duration: 0.7, ease: 'power2.out' }, 1.6);
     });
     return () => mm.revert();
   }, { scope: ref });
@@ -185,6 +184,56 @@ export function Pillars() {
   );
 }
 
+/* ---------- Serviços: duas colunas, uma para cada círculo ---------- */
+export function Services() {
+  const ref = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    if (reducedMotion) return;
+    focusIn(SplitText.create('.services-title', { type: 'words,chars' }).chars, { scrollTrigger: { trigger: '.services-title', start: 'top 85%' } });
+    gsap.utils.toArray<HTMLElement>('.svc-col').forEach((col) => {
+      gsap.from(col.querySelector('.svc-dot'), { scale: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: col, start: 'top 80%' } });
+      gsap.from(col.querySelectorAll('.svc-item'), { autoAlpha: 0, x: -24, duration: 0.8, ease: 'power3.out', stagger: 0.06, scrollTrigger: { trigger: col, start: 'top 75%' } });
+    });
+  }, { scope: ref });
+
+  const cols = [
+    { key: 'beleza', title: 'Estética', sub: 'Beleza', items: site.services.estetica },
+    { key: 'mente', title: 'Saúde mental', sub: 'Mente', items: site.services.mente },
+  ];
+  return (
+    <section ref={ref} className="services section" id="servicos">
+      <div className="container">
+        <p className="sec-label caps"><span className="idx">05</span>Serviços</p>
+        <h2 className="services-title">Cuidados para a aparência e para a mente.</h2>
+        <div className="services-grid">
+          {cols.map((c) => (
+            <div className={`svc-col svc-col--${c.key}`} key={c.key}>
+              <div className="svc-head">
+                <span className="svc-dot" aria-hidden="true" />
+                <h3 className="svc-title">{c.title}</h3>
+                <span className="caps svc-sub">{c.sub} · {String(c.items.length).padStart(2, '0')}</span>
+              </div>
+              <ul className="svc-list">
+                {c.items.map((name, i) => (
+                  <li key={name}>
+                    <a className="svc-item" href={contactAbout(name)} target="_blank" rel="noopener noreferrer">
+                      <span className="svc-n">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="svc-name">{name}</span>
+                      <span className="svc-go" aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p className="services-note caps">Toque em um serviço para falar com a equipe da Tria.</p>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- O espaço: a foto nasce de um círculo e toma a tela ---------- */
 export function Space() {
   const ref = useRef<HTMLElement>(null);
@@ -211,18 +260,18 @@ export function Space() {
           <div className="space-shade" />
         </div>
         <div className="space-overlay container">
-          <p className="sec-label caps"><span className="idx">05</span>O espaço</p>
-          <h2 className="space-title">Um novo espaço tomando forma.</h2>
+          <p className="sec-label caps"><span className="idx">06</span>O espaço</p>
+          <h2 className="space-title">Um espaço pensado para o seu cuidado.</h2>
         </div>
       </div>
       <div className="container space-info">
         <p className="space-text">{site.space}</p>
         <div className="space-side">
-          <p className="space-soon">{site.soon}</p>
+          <p className="space-soon">{site.visit}</p>
           <dl className="spec caps">
-            <div><dt>Status</dt><dd><span className="dot" /> Em preparação</dd></div>
             <div><dt>Cidade</dt><dd>{site.city} — {site.state}</dd></div>
             <div><dt>Frentes</dt><dd>Beleza + saúde mental</dd></div>
+            <div><dt>Atendimento</dt><dd><span className="dot" /> Com agendamento</dd></div>
           </dl>
         </div>
       </div>
@@ -243,8 +292,8 @@ export function Contact() {
   return (
     <section ref={ref} className="contact section" id="contato">
       <div className="container">
-        <p className="sec-label caps"><span className="idx">06</span>Em breve</p>
-        <h2 className="contact-title">Uma nova forma de cuidar já começou a tomar forma <span className="c-copper">por aqui.</span></h2>
+        <p className="sec-label caps"><span className="idx">07</span>Agendamentos</p>
+        <h2 className="contact-title">Venha conhecer uma nova forma de <span className="c-copper">cuidar.</span></h2>
         <div className="rows">
           <a className="row" href={site.instagram.url} target="_blank" rel="noopener noreferrer">
             <span className="row-k caps">Instagram</span>
