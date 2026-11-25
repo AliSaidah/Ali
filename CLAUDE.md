@@ -79,6 +79,7 @@ Ao terminar, acrescente uma linha ao registro.
 |---|---|---|---|---|---|
 | `carolina-baron` | "Noir & champagne", cinematográfico escuro | Bodoni Moda + Manrope | noir, champagne, nude; pausas marfim | nome letra a letra + contador 000–100, sai como cortina | seda líquida em WebGL; seção do método travada com rolagem horizontal; marquee reativo; lista com card seguindo o cursor; foto em arco; orbe magnético com texto girando; logo gigante no rodapé; cursor personalizado; grão |
 | `tria-clinica` | "Mente · Face · Corpo", três círculos que viram um; claro e premium, seguindo a identidade da clínica | Marcellus + Montserrat (caixa alta espaçada) | linho, cimento queimado (mente), conhaque (face), carvalho (corpo), cobre metálico, café no rodapé | três círculos se encontram e se fundem, logo surge no centro, sai por círculo que se fecha | diagrama de três círculos que se fundem (animação automática ao entrar na tela; a versão travada no scroll ficou lenta e foi rejeitada); texto que "ganha foco" (blur); marca-texto na rolagem; quatro cartões empilhados (sticky); galeria em que cada foto nasce de um círculo; foto do hero em círculo com anel de cobre; serviços em três colunas com bolinhas nas cores das frentes; linhas de contato que se preenchem |
+| `03-agency` | site da própria agência: "Você vê o seu site pronto. Depois decide."; página de conversão | Fraunces (itálico com WONK) + Schibsted Grotesk | ultramarino, osso, papel e tinta; sinal laranja no botão flutuante | sem tela de abertura: o título do topo se monta (blocos de rascunho viram texto) e o 03 gigante, tom sobre tom, rola os dígitos | simulador: o visitante digita o nome do negócio e vê um mini-site em 03 estilos conceito (alternam sozinhos, com barra no chip) e o WhatsApp leva o nome; passos com dígitos rolando até o número; grade de cuidados que se enche de azul no hover; perguntas em acordeão; título final gigante |
 
 ## Repertório de movimento
 
@@ -130,7 +131,7 @@ O usuário vende assim: cria o site, manda o link para o dono do negócio e perg
 
 - Todo site novo começa em **modo prévia**:
   - `preview.enabled = true` em `src/content.ts`, com o nome e o WhatsApp da agência
-    (WhatsApp da agência: `5511932114092`; nome da agência ainda não definido);
+    (agência: **03 Agency**, WhatsApp `5511932114092`);
   - meta `robots` `noindex, nofollow` no `index.html`.
   O selo "Prévia feita para você" traz o botão "Quero este site", que abre o WhatsApp da agência.
 - **Publicação (Cloudflare Pages, conta do usuário):**
@@ -153,6 +154,7 @@ O usuário vende assim: cria o site, manda o link para o dono do negócio e perg
 |---|---|---|---|---|
 | `carolina-baron` | `carolina-baron` | (definido na 1ª publicação) | prévia, não publicada | — |
 | `tria-clinica` | `tria-clinica` (Pages, upload manual do zip) | https://tria-clinica.pages.dev | prévia publicada, link pronto para enviar à clínica | 2026-11-23 |
+| `03-agency` | `03-agency` | (definido na 1ª publicação) | site da agência (sem modo prévia), não publicado | — |
 
 - Quando o cliente comprar: `preview.enabled = false`, remova a meta `robots`, peça as fotos
   originais e a autorização de uso, e coloque no domínio do cliente.
