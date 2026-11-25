@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { gsap, useGSAP, reducedMotion, scrollToTarget } from '../lib/motion';
 import { steps, included, faq, contact, agency } from '../content';
-import { Arrow, Logo } from './Chrome';
+import { Arrow, LogoFull, Dot } from './Chrome';
 
 /* ---------- Processo: 03 passos, com os dígitos rolando até o número do passo ---------- */
 export function Process() {
@@ -22,7 +22,7 @@ export function Process() {
       <div className="wrap">
         <div className="sec-head">
           <p className="eyebrow" data-fade>Processo</p>
-          <h2 className="title" data-split>Do primeiro olhar ao site no ar, em <em>03</em> passos.</h2>
+          <h2 className="title" data-split>Do primeiro olhar ao site no ar, em <em>03</em> <span className="nw">passos<Dot /></span></h2>
         </div>
         <ol className="steps">
           {steps.map((s, i) => (
@@ -38,7 +38,7 @@ export function Process() {
           ))}
         </ol>
         <div className="sec-cta" data-fade>
-          <a className="btn btn--bone" href={contact.href} target="_blank" rel="noopener noreferrer">Começar pelo passo 01 <Arrow /></a>
+          <a className="btn btn--violet" href={contact.href} target="_blank" rel="noopener noreferrer">Começar pelo passo 01 <Arrow /></a>
         </div>
       </div>
     </section>
@@ -61,7 +61,7 @@ export function Included() {
     <section ref={ref} className="included" id="inclui">
       <div className="wrap">
         <div className="sec-head sec-head--split">
-          <h2 className="title" data-split>O que vem em <em>todo</em> site.</h2>
+          <h2 className="title" data-split>O que vem em <em>todo</em> <span className="nw">site<Dot /></span></h2>
           <p className="body" data-fade>Cada projeto tem a sua cara, mas estes cuidados estão sempre lá.</p>
         </div>
         <ul className="inc-grid">
@@ -86,7 +86,7 @@ export function Faq() {
       <div className="wrap faq-grid">
         <div className="sec-head">
           <p className="eyebrow" data-fade>Perguntas</p>
-          <h2 className="title" data-split>Antes de você <em>perguntar.</em></h2>
+          <h2 className="title" data-split>Antes de você <span className="nw"><em>perguntar</em><Dot /></span></h2>
         </div>
         <div className="faq-list" data-fade>
           {faq.map((f, i) => {
@@ -120,7 +120,7 @@ export function Final() {
         <h2 className="final-title" data-split>Vamos fazer o <em>seu?</em></h2>
         <div className="final-foot" data-fade>
           <p className="body">Mande o nome e o Instagram do seu negócio pelo WhatsApp. A gente responde e começa a sua prévia.</p>
-          <a className="btn btn--blue btn--lg" href={contact.href} target="_blank" rel="noopener noreferrer">Chamar no WhatsApp <Arrow /></a>
+          <a className="btn btn--violet btn--lg" href={contact.href} target="_blank" rel="noopener noreferrer">Chamar no WhatsApp <Arrow /></a>
         </div>
       </div>
     </section>
@@ -132,7 +132,7 @@ export function Footer() {
   return (
     <footer className="footer">
       <div className="wrap footer-row">
-        <Logo />
+        <LogoFull />
         <p>{agency.tagline}</p>
         <a href={contact.href} target="_blank" rel="noopener noreferrer">WhatsApp {phone}</a>
         <p>© {agency.year} {agency.name}</p>

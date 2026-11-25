@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { gsap, useGSAP, reducedMotion, scrollToTarget } from '../lib/motion';
 import { hero, contact } from '../content';
-import { Arrow } from './Chrome';
+import { Arrow, Dot, Mark } from './Chrome';
 
 /* Topo: o título "se monta" na frente do visitante.
    Primeiro surgem blocos de rascunho (como um site em construção), depois o texto
@@ -18,17 +18,16 @@ export function Hero() {
       .to('.hl-txt', { yPercent: 0, duration: 1.1, stagger: 0.12, ease: 'expo.out' }, 0.7)
       .set('.hl-skel', { transformOrigin: '100% 50%' }, 0.7)
       .to('.hl-skel', { scaleX: 0, duration: 0.6, stagger: 0.12, ease: 'power3.inOut' }, 0.78)
-      .from('.hn-0', { yPercent: 100, duration: 1.2, ease: 'expo.out' }, 0.3)
-      .fromTo('.hn-roll', { y: 0, yPercent: 0 }, { y: 0, yPercent: -75, duration: 1.6, ease: 'power4.inOut' }, 0.35)
+      // A marca do logo se monta: ponto branco, zero e três sobem, ponto central aparece.
+      .fromTo('.hero-mark .mk-dot', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.8, ease: 'back.out(3)' }, 0.25)
+      .fromTo('.hero-mark .mk-zero, .hero-mark .mk-three', { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 1.4, stagger: 0.12, ease: 'expo.out' }, 0.35)
+      .fromTo('.hero-title .vdot', { scale: 0 }, { scale: 1, duration: 0.7, ease: 'back.out(3)' }, 1.5)
       .fromTo('.hero-lead, .hero-actions > *', { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.08, ease: 'power3.out' }, 1.15);
   }, { scope: ref });
 
   return (
     <section ref={ref} className="hero" id="topo">
-      <div className="hero-num" aria-hidden="true">
-        <span className="hn-mask"><span className="hn-0">0</span></span>
-        <span className="hn-mask hn-3"><span className="hn-roll" style={{ transform: 'translateY(-75%)' }}><span>0</span><span>1</span><span>2</span><span>3</span></span></span>
-      </div>
+      <Mark className="hero-mark" />
 
       <div className="hero-inner wrap">
         <p className="hero-kicker">
@@ -42,7 +41,7 @@ export function Hero() {
               <span className="hl-in">
                 <span className="hl-skel" aria-hidden="true" />
                 <span className="hl-txt">
-                  {line.map((s, j) => ('em' in s && s.em ? <em key={j}>{s.t}</em> : <span key={j}>{s.t}</span>))}
+                  {line.map((s, j) => ('dot' in s ? <Dot key={j} /> : 'em' in s && s.em ? <em key={j}>{s.t}</em> : <span key={j}>{s.t}</span>))}
                 </span>
               </span>
             </span>
@@ -52,7 +51,7 @@ export function Hero() {
         <div className="hero-foot">
           <p className="hero-lead">{hero.lead}</p>
           <div className="hero-actions">
-            <a className="btn btn--bone" href={contact.href} target="_blank" rel="noopener noreferrer">Pedir minha prévia <Arrow /></a>
+            <a className="btn btn--white" href={contact.href} target="_blank" rel="noopener noreferrer">Pedir minha prévia <Arrow /></a>
             <a className="link-under" href="#experimente" onClick={(e) => { e.preventDefault(); scrollToTarget('#experimente'); }}>
               Experimente com o seu nome <Arrow dir="down" />
             </a>

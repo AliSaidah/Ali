@@ -39,6 +39,11 @@ export default function App() {
         yPercent: 110, duration: 1.1, ease: 'expo.out', stagger: 0.06,
         scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
       });
+      const dot = el.querySelector('.vdot');
+      if (dot) gsap.fromTo(dot, { scale: 0 }, {
+        scale: 1, duration: 0.7, ease: 'back.out(3)', delay: 0.15 + split.words.length * 0.06,
+        scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+      });
     });
     gsap.utils.toArray<HTMLElement>('[data-fade]').forEach((el) => {
       gsap.fromTo(el, { autoAlpha: 0, y: 26 }, {

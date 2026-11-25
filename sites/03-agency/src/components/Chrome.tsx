@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { gsap, useGSAP, reducedMotion, scrollToTarget } from '../lib/motion';
 import { contact } from '../content';
+import { DOT, ZERO, THREE, LINE, AGENCY, VIOLET, VIEW_MARK, VIEW_FULL } from '../lib/logo';
 
 /* Seta em SVG (os caracteres ↗ ↓ viram emoji no iPhone). */
 const ROT = { ne: 0, down: 135, right: 45 } as const;
@@ -13,12 +14,39 @@ export function Arrow({ dir = 'ne' }: { dir?: keyof typeof ROT }) {
   );
 }
 
-/* Marca: "0" reto + "3" itálico, e "Agency" em caixa alta. */
+/* Ponto roxo do logo, usado como "ponto final" dos títulos. */
+export function Dot() {
+  return <span className="vdot" aria-hidden="true" />;
+}
+
+/* Marca "03" do logo (ponto branco, zero com ponto central e três), em SVG. */
+export function Mark({ className = '' }: { className?: string }) {
+  return (
+    <svg className={`mark ${className}`} viewBox={VIEW_MARK} aria-hidden="true" focusable="false">
+      <path className="mk-dot" d={DOT} />
+      <path className="mk-zero" d={ZERO} fillRule="evenodd" />
+      <path className="mk-three" d={THREE} />
+    </svg>
+  );
+}
+
+/* Logo completo (empilhado), como no arquivo original. */
+export function LogoFull({ className = '' }: { className?: string }) {
+  return (
+    <svg className={`logo-full ${className}`} viewBox={VIEW_FULL} role="img" aria-label="03 Agency">
+      <path d={DOT} /><path d={ZERO} fillRule="evenodd" /><path d={THREE} />
+      <path d={LINE} /><path d={AGENCY} fillRule="evenodd" />
+      <circle cx={VIOLET.cx} cy={VIOLET.cy} r={VIOLET.r} fill="var(--violet)" />
+    </svg>
+  );
+}
+
+/* Versão horizontal para o menu: marca + AGENCY + ponto roxo. */
 export function Logo({ className = '' }: { className?: string }) {
   return (
     <span className={`logo ${className}`}>
-      <span className="logo-num"><span>0</span><em>3</em></span>
-      <span className="logo-word">Agency</span>
+      <Mark />
+      <span className="logo-word">Agency<Dot /></span>
     </span>
   );
 }

@@ -17,12 +17,12 @@ export const contact = {
 
 export const hero = {
   kicker: agency.tagline,
-  // Cada linha do título; trechos com em: true ficam em itálico.
+  // Trechos com em: true ficam em roxo; dot: true é o ponto roxo do logo.
   title: [
     [{ t: 'Você vê o seu' }],
     [{ t: 'site ' }, { t: 'pronto', em: true }, { t: '.' }],
-    [{ t: 'Depois decide.' }],
-  ],
+    [{ t: 'Depois decide' }, { dot: true }],
+  ] as ({ t: string; em?: boolean } | { dot: true })[][],
   // CONFIRMAR: a prévia antes de qualquer pagamento é o modelo de venda atual.
   lead: 'A 03 estuda o seu negócio e cria uma prévia do seu site, sob medida e com o seu conteúdo, antes de qualquer pagamento.',
   status: 'Aceitando novos projetos',

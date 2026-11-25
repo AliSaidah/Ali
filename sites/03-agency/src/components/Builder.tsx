@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap, useGSAP, reducedMotion } from '../lib/motion';
 import { skins, wa } from '../content';
-import { Arrow } from './Chrome';
+import { Arrow, Dot } from './Chrome';
 
 const CYCLE_MS = 3600;
 
@@ -57,7 +57,7 @@ export function Builder() {
       <div className="wrap builder-grid">
         <div className="b-head">
           <p className="eyebrow" data-fade>Experimente</p>
-          <h2 className="title" data-split>Digite o nome do seu <em>negócio.</em></h2>
+          <h2 className="title" data-split>Digite o nome do seu <span className="nw"><em>negócio</em><Dot /></span></h2>
           <p className="body" data-fade>Veja como ele ficaria em um dos nossos 03 estilos de projeto conceito.</p>
         </div>
 
@@ -109,7 +109,7 @@ export function Builder() {
         </div>
 
         <div className="b-cta" data-fade>
-          <a className="btn btn--blue" href={href} target="_blank" rel="noopener noreferrer">Quero uma prévia assim <Arrow /></a>
+          <a className="btn btn--violet" href={href} target="_blank" rel="noopener noreferrer">Quero uma prévia assim <Arrow /></a>
         </div>
       </div>
     </section>
