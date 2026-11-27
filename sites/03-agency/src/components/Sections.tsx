@@ -22,7 +22,7 @@ export function Process() {
       <div className="wrap">
         <div className="sec-head">
           <p className="eyebrow" data-fade>Processo</p>
-          <h2 className="title" data-split>Do primeiro olhar ao site no ar, em <em>03</em> <span className="nw">passos<Dot /></span></h2>
+          <h2 className="title" data-split>Da prévia ao site no ar, em <em>03</em> <span className="nw">passos<Dot /></span></h2>
         </div>
         <ol className="steps">
           {steps.map((s, i) => (

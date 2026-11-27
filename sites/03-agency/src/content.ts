@@ -28,7 +28,7 @@ export const hero = {
   status: 'Aceitando novos projetos',
 };
 
-// Projetos conceito do simulador. Cada site real é criado do zero.
+// Estilos conceito da demonstração. Cada site real é criado do zero pela 03.
 export const skins = [
   {
     id: 'noir', label: 'Noir', segment: 'Estética e beleza',
@@ -48,12 +48,12 @@ export type SkinId = (typeof skins)[number]['id'];
 
 export const steps = [
   {
-    title: 'Prévia',
-    text: 'Estudamos o seu negócio, a sua marca e o seu público, e criamos o seu site de verdade, com o seu nome e o seu conteúdo. Você recebe um link para abrir no celular.',
+    title: 'Você vê a prévia',
+    text: 'A 03 estuda o seu negócio, a sua marca e o seu público, e cria o seu site de verdade, do zero, com o seu nome e o seu conteúdo. Você recebe um link para abrir no celular.',
   },
   {
-    title: 'Ajustes',
-    text: 'Você conta o que quer mudar: textos, fotos, serviços, contatos. A gente ajusta até o site ficar com a cara do seu negócio.',
+    title: 'Aprova e ajusta',
+    text: 'Gostou? Você aprova e conta o que quer mudar: textos, fotos, serviços, contatos. A gente ajusta até o site ficar com a cara do seu negócio.',
   },
   {
     title: 'No ar',

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap, useGSAP, reducedMotion } from '../lib/motion';
-import { skins, wa } from '../content';
+import { skins, steps, wa } from '../content';
 import { Arrow, Dot } from './Chrome';
 
 const CYCLE_MS = 3600;
@@ -8,8 +8,8 @@ const CYCLE_MS = 3600;
 const slug = (s: string) =>
   s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '') || 'seunegocio';
 
-/* Momento uau: o visitante digita o nome do negócio e vê, na hora, um mini-site
-   com esse nome em um dos 03 estilos de projeto conceito. Enquanto ninguém mexe,
+/* Momento uau (demonstração do conceito, não um construtor de sites): o visitante digita
+   o nome do negócio e vê, na hora, um mini-site com esse nome em um dos 03 estilos conceito. Enquanto ninguém mexe,
    os estilos se alternam sozinhos. */
 export function Builder() {
   const ref = useRef<HTMLElement>(null);
@@ -50,20 +50,20 @@ export function Builder() {
 
   const pick = (i: number) => { setTouched(true); setIdx(i); };
   const fit = Math.min(1, 10 / Math.max(shown.length, 4));
-  const href = wa(`Olá! Vim pelo site da 03 Agency e quero uma prévia do site para ${name.trim() || 'o meu negócio'} (estilo ${skin.label}).`);
+  const href = wa(`Olá! Vim pelo site da 03 Agency e quero uma prévia de verdade do site ${name.trim() ? `para ${name.trim()}` : 'do meu negócio'}. Na demonstração, gostei do estilo ${skin.label}.`);
 
   return (
     <section ref={ref} className="builder" id="experimente">
       <div className="wrap builder-grid">
         <div className="b-head">
-          <p className="eyebrow" data-fade>Experimente</p>
-          <h2 className="title" data-split>Digite o nome do seu <span className="nw"><em>negócio</em><Dot /></span></h2>
-          <p className="body" data-fade>Veja como ele ficaria em um dos nossos 03 estilos de projeto conceito.</p>
+          <p className="eyebrow" data-fade>Demonstração</p>
+          <h2 className="title" data-split>Veja como funciona a <span className="nw"><em>prévia</em><Dot /></span></h2>
+          <p className="body" data-fade>Isto é só uma demonstração do conceito: digite o nome do seu negócio para ter uma ideia. O seu site de verdade é criado pela 03, do zero, e você recebe o link para ver.</p>
         </div>
 
         <div className="b-controls" data-fade>
           <label className="field">
-            <span className="field-label">Nome do negócio</span>
+            <span className="field-label">Teste com o nome do seu negócio</span>
             <input
               type="text" value={name} maxLength={28} placeholder="Ex.: Café Aurora" autoComplete="organization"
               onChange={(e) => { setName(e.target.value); setTouched(true); }}
@@ -89,6 +89,7 @@ export function Builder() {
             <div className="mock-bar">
               <i /><i /><i />
               <span className="mock-url">{slug(name)}.com.br</span>
+              <span className="mock-tag">Demonstração</span>
             </div>
             <div className="mock-page">
               <div className="mock-nav">
@@ -105,11 +106,16 @@ export function Builder() {
               <div className="mock-cards"><i /><i /><i /></div>
             </div>
           </div>
-          <p className="caption">Projetos conceito. Cada site 03 é criado do zero para o seu negócio.</p>
+          <p className="caption">Demonstração com estilos conceito. Na vida real:</p>
+          <ol className="flow" aria-label="Como funciona na vida real">
+            {steps.map((st) => st.title).map((t, i) => (
+              <li key={t}><span>0{i + 1}</span>{t}</li>
+            ))}
+          </ol>
         </div>
 
         <div className="b-cta" data-fade>
-          <a className="btn btn--violet" href={href} target="_blank" rel="noopener noreferrer">Quero uma prévia assim <Arrow /></a>
+          <a className="btn btn--violet" href={href} target="_blank" rel="noopener noreferrer">Quero a minha prévia de verdade <Arrow /></a>
         </div>
       </div>
     </section>

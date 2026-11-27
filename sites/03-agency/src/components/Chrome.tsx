@@ -52,7 +52,7 @@ export function Logo({ className = '' }: { className?: string }) {
 }
 
 const links = [
-  { href: '#experimente', label: 'Experimente' },
+  { href: '#experimente', label: 'Demonstração' },
   { href: '#processo', label: 'Processo' },
   { href: '#inclui', label: 'O que vem' },
   { href: '#perguntas', label: 'Perguntas' },

@@ -53,7 +53,7 @@ export function Hero() {
           <div className="hero-actions">
             <a className="btn btn--white" href={contact.href} target="_blank" rel="noopener noreferrer">Pedir minha prévia <Arrow /></a>
             <a className="link-under" href="#experimente" onClick={(e) => { e.preventDefault(); scrollToTarget('#experimente'); }}>
-              Experimente com o seu nome <Arrow dir="down" />
+              Ver como funciona <Arrow dir="down" />
             </a>
           </div>
         </div>

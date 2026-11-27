@@ -189,6 +189,16 @@ em { font-style: normal; color: var(--violet-light); }
 @keyframes chipfill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 .caption { margin-top: 18px; font-size: 13px; color: var(--muted); }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.flow li {
+  display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 10px;
+  font-size: 13px; color: var(--white);
+}
+.flow li span { font-family: var(--f-display); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--violet-light); }
+.mock-tag {
+  flex: none; padding: 3px 9px; border-radius: 6px; background: var(--violet-deep); color: var(--white);
+  font-family: var(--f-display); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+}
 
 /* Janela do navegador com o mini-site */
 .mock {
@@ -199,7 +209,7 @@ em { font-style: normal; color: var(--violet-light); }
 .mock-bar { display: flex; align-items: center; gap: 7px; height: 40px; padding: 0 16px; background: rgba(255, 255, 255, 0.55); border-bottom: 1px solid rgba(17, 17, 20, 0.08); }
 .mock-bar i { width: 10px; height: 10px; border-radius: 50%; background: rgba(17, 17, 20, 0.18); }
 .mock-url {
-  margin: 0 auto; padding: 4px 16px; border-radius: 999px; background: rgba(255, 255, 255, 0.7);
+  margin: 0 auto 0 12%; padding: 4px 16px; border-radius: 999px; background: rgba(255, 255, 255, 0.7);
   font-size: 12px; color: #55545a; max-width: 60%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .mock-page { position: relative; display: flex; flex-direction: column; height: calc(100% - 40px); padding: 4cqi 5cqi; overflow: hidden; }
