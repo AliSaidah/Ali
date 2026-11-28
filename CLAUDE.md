@@ -156,7 +156,7 @@ O usuário vende assim: cria o site, manda o link para o dono do negócio e perg
 | `carolina-baron` | `carolina-baron` | (definido na 1ª publicação) | prévia, não publicada | — |
 | `tria-clinica` | `tria-clinica` (Pages, upload manual do zip) | https://tria-clinica.pages.dev | prévia publicada, link pronto para enviar à clínica | 2026-11-23 |
 | `03-agency` | `03-agency` | (definido na 1ª publicação) | site da agência (sem modo prévia), não publicado | — |
-| `crosta-paes` | `crosta-paes` | (definido na 1ª publicação) | teste com dados fictícios (aviso no rodapé), indexável para testar SEO; não publicado | — |
+| `crosta-paes` | `crosta-paes` (Pages, upload manual do zip) | https://crosta-paes.pages.dev | teste com dados fictícios (aviso no rodapé), publicado e verificado no Google Search Console (arquivo HTML) | 2026-11-28 |
 
 - Quando o cliente comprar: `preview.enabled = false`, remova a meta `robots`, peça as fotos
   originais e a autorização de uso, e coloque no domínio do cliente.
